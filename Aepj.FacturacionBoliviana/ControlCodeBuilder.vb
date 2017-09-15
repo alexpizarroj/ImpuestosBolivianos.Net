@@ -46,7 +46,7 @@ Public Class ControlCodeBuilder
     Private Class ControlCodeBuilderImpl
         Private _BuildStepOneResult As String
         Private _BuildStepThreeResult As String
-        Private _BuildStepFourResult(0 To 5) As Int32
+        Private _BuildStepFourResult(5) As Int32
         Private _BuildStepFiveResult As String
         Private _BuildStepSixResult As String
         Private _NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave As String
@@ -125,12 +125,12 @@ Public Class ControlCodeBuilder
             Next
 
             For i As Int32 = 0 To (_BuildStepThreeResult.Length - 1) Step 5
-                For j As Int32 = 1 To 5
+                For j As Int32 = 0 To 4
                     Dim k = i + j
                     If (k < _BuildStepThreeResult.Length) Then
                         Dim value = Convert.ToInt32(_BuildStepThreeResult(k))
                         _BuildStepFourResult(0) += value
-                        _BuildStepFourResult(j) += value
+                        _BuildStepFourResult(j + 1) += value
                     End If
                 Next
             Next
@@ -138,9 +138,9 @@ Public Class ControlCodeBuilder
 
         Private Sub BuildStepFive()
             Dim sum As Int64 = 0
-            For i As Int32 = 1 To 5
+            For i As Int32 = 0 To 4
                 Dim value As Int64 = _BuildStepFourResult(0)
-                value = value * _BuildStepFourResult(i)
+                value = value * _BuildStepFourResult(i + 1)
                 value = value \ (Int32.Parse(_BuildStepOneResult(i)) + 1)
                 sum += value
             Next

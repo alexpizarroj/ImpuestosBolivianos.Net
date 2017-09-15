@@ -15,14 +15,14 @@ Public Class QrCodeBuilder
 
     Private ReadOnly ImpuestosNacionalesNFI As New NumberFormatInfo With
         {.NumberDecimalSeparator = ".", .NumberGroupSeparator = "", .NumberDecimalDigits = 2}
-    Private ReadOnly DefaultImageFormat As ImageFormat = ImageFormat.Png
+    Private ReadOnly ResultingImageFormat As ImageFormat = ImageFormat.Png
     Private _NroAutorizacion, _NroFactura, _Fecha, _CodigoControl As String
     Private _NitEmisor, _NitCliente As String
     Private _ImporteTotal, _ImporteBaseCf As String
-    Private _ImporteIceIehdTasas As String = StringifyForQrContent(0.0)
-    Private _ImporteVentasNoGravadas As String = StringifyForQrContent(0.0)
-    Private _ImporteNoSujetoCf As String = StringifyForQrContent(0.0)
-    Private _DescuentosBonosRebajas As String = StringifyForQrContent(0.0)
+    Private _ImporteIceIehdTasas As String = StringifyQrCodeTextContentElement(0.0)
+    Private _ImporteVentasNoGravadas As String = StringifyQrCodeTextContentElement(0.0)
+    Private _ImporteNoSujetoCf As String = StringifyQrCodeTextContentElement(0.0)
+    Private _DescuentosBonosRebajas As String = StringifyQrCodeTextContentElement(0.0)
 
     Public Function WithNroAutorizacion(nroAutorizacion As String) As QrCodeBuilder
         _NroAutorizacion = nroAutorizacion
@@ -35,7 +35,7 @@ Public Class QrCodeBuilder
     End Function
 
     Public Function WithFecha(fecha As DateTime) As QrCodeBuilder
-        _Fecha = StringifyForQrContent(fecha)
+        _Fecha = StringifyQrCodeTextContentElement(fecha)
         Return Me
     End Function
 
@@ -55,43 +55,43 @@ Public Class QrCodeBuilder
     End Function
 
     Public Function WithImporteTotal(importe As Double) As QrCodeBuilder
-        _ImporteTotal = StringifyForQrContent(importe)
+        _ImporteTotal = StringifyQrCodeTextContentElement(importe)
         Return Me
     End Function
 
     Public Function WithImporteBaseCf(importe As Double) As QrCodeBuilder
-        _ImporteBaseCf = StringifyForQrContent(importe)
+        _ImporteBaseCf = StringifyQrCodeTextContentElement(importe)
         Return Me
     End Function
 
     Public Function WithImporteIceIehdTasas(importe As Double) As QrCodeBuilder
-        _ImporteIceIehdTasas = StringifyForQrContent(importe)
+        _ImporteIceIehdTasas = StringifyQrCodeTextContentElement(importe)
         Return Me
     End Function
 
     Public Function WithImporteVentasNoGravadas(importe As Double) As QrCodeBuilder
-        _ImporteVentasNoGravadas = StringifyForQrContent(importe)
+        _ImporteVentasNoGravadas = StringifyQrCodeTextContentElement(importe)
         Return Me
     End Function
 
     Public Function WithImporteNoSujetoCf(importe As Double) As QrCodeBuilder
-        _ImporteNoSujetoCf = StringifyForQrContent(importe)
+        _ImporteNoSujetoCf = StringifyQrCodeTextContentElement(importe)
         Return Me
     End Function
 
     Public Function WithDescuentosBonosRebajas(importe As Double) As QrCodeBuilder
-        _DescuentosBonosRebajas = StringifyForQrContent(importe)
+        _DescuentosBonosRebajas = StringifyQrCodeTextContentElement(importe)
         Return Me
     End Function
 
-    Private Function StringifyForQrContent(value As Double) As String
+    Private Function StringifyQrCodeTextContentElement(value As Double) As String
         ' value <= 0: "No corresponde"; se pone exactamente "0"
         If (value <= 0) Then Return "0"
         ' value > 0: Formatear con dos decimas, usando "." como separador decimal
         Return value.ToString("0.00", ImpuestosNacionalesNFI)
     End Function
 
-    Private Function StringifyForQrContent(value As DateTime) As String
+    Private Function StringifyQrCodeTextContentElement(value As DateTime) As String
         Return value.ToString("dd/MM/yyyy")
     End Function
 
@@ -115,58 +115,18 @@ Public Class QrCodeBuilder
         End Get
     End Property
 
-    <ComVisible(False)>
-    Public Sub WriteToStream(stream As Stream)
-        WriteToStream(stream, DefaultImageFormat)
-    End Sub
-
-    <ComVisible(False)>
-    Public Sub WriteToStream(stream As Stream, imageFormat As ImageFormat)
+    Public Function ToPngImageByteArray() As Byte()
         Dim encoder As New QrEncoder(ErrorCorrectionLevel.M)
-        Dim qrCode As QrCode = Nothing
-        encoder.TryEncode(TextContents, qrCode)
+        Dim resultingQrCode As QrCode = Nothing
+        encoder.TryEncode(TextContents, resultingQrCode)
 
         Const moduleSizeInPixels As Int32 = 5
         Dim renderer As New GraphicsRenderer(
             New FixedModuleSize(moduleSizeInPixels, QuietZoneModules.Two), Brushes.Black, Brushes.White)
 
-        renderer.WriteToStream(qrCode.Matrix, imageFormat, stream)
-    End Sub
-
-    Public Function WriteToTemporaryFile() As String
-        Dim path = IO.Path.GetTempFileName()
-        WriteToFile(path)
-        Return path
-    End Function
-
-    Public Sub WriteToFile(path As String)
-        WriteToFile(path, DefaultImageFormat)
-    End Sub
-
-    <ComVisible(False)>
-    Public Sub WriteToFile(path As String, imageFormat As ImageFormat)
-        Using fstream As New FileStream(path, FileMode.Create, IO.FileAccess.Write)
-            WriteToStream(fstream, imageFormat)
-        End Using
-    End Sub
-
-    Public Function ToByteArray() As Byte()
-        Return ToByteArray(DefaultImageFormat)
-    End Function
-
-    <ComVisible(False)>
-    Public Function ToByteArray(imageFormat As ImageFormat) As Byte()
-        Using mstream As New MemoryStream
-            WriteToStream(mstream, imageFormat)
-            Return mstream.ToArray()
-        End Using
-    End Function
-
-    <ComVisible(False)>
-    Public Function ToBitmap() As Bitmap
         Using mstream = New MemoryStream()
-            WriteToStream(mstream)
-            Return DirectCast(Image.FromStream(mstream), Bitmap)
+            renderer.WriteToStream(resultingQrCode.Matrix, ResultingImageFormat, mstream)
+            Return mstream.ToArray()
         End Using
     End Function
 End Class

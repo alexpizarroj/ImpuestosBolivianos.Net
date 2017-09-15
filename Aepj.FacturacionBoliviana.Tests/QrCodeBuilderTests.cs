@@ -1,7 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
+using ZXing;
+using ZXing.Common;
+using ZXing.QrCode;
 
 namespace Aepj.FacturacionBoliviana.Tests
 {
@@ -68,7 +72,7 @@ namespace Aepj.FacturacionBoliviana.Tests
             "|DataDirectory|\\csv\\5000CasosPruebaDerivadosCodigoQr.csv",
             "5000CasosPruebaDerivadosCodigoQr#csv", DataAccessMethod.Sequential)]
         [TestMethod]
-        public void WriteToStream_InputFromDerived5000QrCodeTestCases_GeneratedStreamQrReadingShouldMatchTestData()
+        public void ToPngImageByteArray_InputFromDerived5000QrCodeTestCases_GeneratedStreamQrReadingShouldMatchTestData()
         {
             var nitEmisor = Convert.ToString(TestContext.DataRow["NitEmisor"]);
             var nroFactura = Convert.ToString(TestContext.DataRow["NroFactura"]);
@@ -84,26 +88,21 @@ namespace Aepj.FacturacionBoliviana.Tests
             var descuentosBonosRebajas = Convert.ToDouble(TestContext.DataRow["DescuentosBonosRebajas"]);
             String expected = Convert.ToString(TestContext.DataRow["ContenidoCodigoQr"]);
 
-            String actual;
-            using (var mstream = new MemoryStream())
-            {
-                new QrCodeBuilder()
-                    .WithNitEmisor(nitEmisor)
-                    .WithNroFactura(nroFactura)
-                    .WithNroAutorizacion(nroAutorizacion)
-                    .WithFecha(fecha)
-                    .WithImporteTotal(importeTotal)
-                    .WithImporteBaseCf(importeBaseCf)
-                    .WithCodigoControl(codigoControl)
-                    .WithNitCliente(nitCliente)
-                    .WithImporteIceIehdTasas(importeIceIehdTasas)
-                    .WithImporteVentasNoGravadas(importeVentasNoGravadas)
-                    .WithImporteNoSujetoCf(importeNoSujetoCf)
-                    .WithDescuentosBonosRebajas(descuentosBonosRebajas)
-                    .WriteToStream(mstream);
-
-                actual = QrCodeReadingHelper.ReadContentsFromImageStream(mstream);
-            }
+            var imageBytes = new QrCodeBuilder()
+                .WithNitEmisor(nitEmisor)
+                .WithNroFactura(nroFactura)
+                .WithNroAutorizacion(nroAutorizacion)
+                .WithFecha(fecha)
+                .WithImporteTotal(importeTotal)
+                .WithImporteBaseCf(importeBaseCf)
+                .WithCodigoControl(codigoControl)
+                .WithNitCliente(nitCliente)
+                .WithImporteIceIehdTasas(importeIceIehdTasas)
+                .WithImporteVentasNoGravadas(importeVentasNoGravadas)
+                .WithImporteNoSujetoCf(importeNoSujetoCf)
+                .WithDescuentosBonosRebajas(descuentosBonosRebajas)
+                .ToPngImageByteArray();
+            String actual = ReadQrCodeContents(imageBytes);
 
             /*
              * Test for equality *only* if we got a reading (i.e. actual != null)
@@ -111,6 +110,25 @@ namespace Aepj.FacturacionBoliviana.Tests
              *   from the testcase set are not being recognized by ZXing
              */
             if (actual != null) Assert.AreEqual(expected, actual);
+        }
+
+        private String ReadQrCodeContents(byte[] imageBytes)
+        {
+            using (var mstream = new MemoryStream(imageBytes))
+            {
+                using (var bitmap = Image.FromStream(mstream) as Bitmap)
+                {
+                    var luminanceSource = new BitmapLuminanceSource(bitmap);
+
+                    var binarizer = new HybridBinarizer(luminanceSource);
+
+                    var binaryBitmap = new BinaryBitmap(binarizer);
+
+                    var result = new QRCodeReader().decode(binaryBitmap)?.Text;
+
+                    return result;
+                }
+            }
         }
     }
 }
