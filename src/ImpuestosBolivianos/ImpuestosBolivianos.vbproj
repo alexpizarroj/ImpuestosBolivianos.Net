@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B8E6A38C-656E-4F16-A100-FF70CD3F269D}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Aepj.FacturacionBoliviana</RootNamespace>
-    <AssemblyName>Aepj.FacturacionBoliviana</AssemblyName>
+    <RootNamespace>ImpuestosBolivianos</RootNamespace>
+    <AssemblyName>ImpuestosBolivianos</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>Windows</MyType>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -19,7 +19,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>Aepj.FacturacionBoliviana.xml</DocumentationFile>
+    <DocumentationFile>ImpuestosBolivianos.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
     <RegisterForComInterop>true</RegisterForComInterop>
@@ -33,7 +33,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>Aepj.FacturacionBoliviana.xml</DocumentationFile>
+    <DocumentationFile>ImpuestosBolivianos.xml</DocumentationFile>
     <NoWarn>
     </NoWarn>
     <RegisterForComInterop>true</RegisterForComInterop>
@@ -56,14 +56,14 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Aepj.FacturacionBoliviana.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>ImpuestosBolivianos.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DocumentationFile>Aepj.FacturacionBoliviana.xml</DocumentationFile>
+    <DocumentationFile>ImpuestosBolivianos.xml</DocumentationFile>
     <RegisterForComInterop>true</RegisterForComInterop>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -73,7 +73,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DocumentationFile>Aepj.FacturacionBoliviana.xml</DocumentationFile>
+    <DocumentationFile>ImpuestosBolivianos.xml</DocumentationFile>
     <Optimize>true</Optimize>
     <RegisterForComInterop>true</RegisterForComInterop>
     <DebugType>pdbonly</DebugType>
@@ -101,9 +101,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlCodeBuilder.vb" />
-    <Compile Include="ImpuestosNacionales\CustomAllegedRC4Cipher.vb" />
-    <Compile Include="ImpuestosNacionales\CustomBase64Encoder.vb" />
-    <Compile Include="ImpuestosNacionales\CustomVerhoeffDigitCalculator.vb" />
+    <Compile Include="COM\Facturacion.vb" />
+    <Compile Include="CustomAllegedRC4Cipher.vb" />
+    <Compile Include="CustomBase64Encoder.vb" />
+    <Compile Include="CustomVerhoeffDigitCalculator.vb" />
     <Compile Include="QrCodeBuilder.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -130,7 +131,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Aepj.FacturacionBoliviana.snk" />
+    <None Include="ImpuestosBolivianos.snk" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

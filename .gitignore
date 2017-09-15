@@ -6,7 +6,7 @@
 # Ignore all signing keys (.snk)
 **/*.snk
 # Excluding the Fake.snk template
-!/Fake.snk
+!/src/Fake.snk
 
 # User-specific files
 *.suo

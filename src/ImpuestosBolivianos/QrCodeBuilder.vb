@@ -2,17 +2,10 @@
 Imports System.Drawing.Imaging
 Imports System.Globalization
 Imports System.IO
-Imports System.Runtime.InteropServices
 Imports Gma.QrCodeNet.Encoding
 Imports Gma.QrCodeNet.Encoding.Windows.Render
 
-<ComVisible(True)>
-<ComClass(QrCodeBuilder.ClassId, QrCodeBuilder.InterfaceId, QrCodeBuilder.EventsId)>
 Public Class QrCodeBuilder
-    Public Const ClassId As String = "89081d2d-b97f-4d9a-b822-e573c16c6f09"
-    Public Const InterfaceId As String = "19c8debe-bced-4a2b-8b26-2a275e5a7550"
-    Public Const EventsId As String = "55ffcfe5-9c96-4803-bea4-e027145dff60"
-
     Private ReadOnly ImpuestosNacionalesNFI As New NumberFormatInfo With
         {.NumberDecimalSeparator = ".", .NumberGroupSeparator = "", .NumberDecimalDigits = 2}
     Private ReadOnly ResultingImageFormat As ImageFormat = ImageFormat.Png
@@ -115,7 +108,7 @@ Public Class QrCodeBuilder
         End Get
     End Property
 
-    Public Function ToPngImageByteArray() As Byte()
+    Public Function ToPngByteArray() As Byte()
         Dim encoder As New QrEncoder(ErrorCorrectionLevel.M)
         Dim resultingQrCode As QrCode = Nothing
         encoder.TryEncode(TextContents, resultingQrCode)

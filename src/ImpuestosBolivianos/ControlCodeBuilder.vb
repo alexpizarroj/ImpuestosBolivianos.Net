@@ -1,12 +1,4 @@
-﻿Imports System.Runtime.InteropServices
-Imports Aepj.FacturacionBoliviana.ImpuestosNacionales
-
-<ComVisible(True)>
-<ComClass(ControlCodeBuilder.ClassId, ControlCodeBuilder.InterfaceId, ControlCodeBuilder.EventsId)>
-Public Class ControlCodeBuilder
-    Public Const ClassId As String = "CA14A5DA-15E8-4E24-A865-8522D58B6A72"
-    Public Const InterfaceId As String = "A77BE2F8-CE32-4C19-8507-366031BE5FDE"
-    Public Const EventsId As String = "CBE8E013-BD3F-481D-8F4A-C4A90730DDAB"
+﻿Public Class ControlCodeBuilder
     Private _NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave As String
 
     Public Function WithNroAutorizacion(nroAutorizacion As String) As ControlCodeBuilder

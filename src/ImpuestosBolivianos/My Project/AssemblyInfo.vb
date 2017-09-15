@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("AEPJ Facturación Boliviana")>
-<Assembly: AssemblyDescription("AEPJ Facturación Boliviana")>
+<Assembly: AssemblyTitle("Impuestos Bolivianos .NET")>
+<Assembly: AssemblyDescription("Impuestos Bolivianos .NET")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("AEPJ Facturación Boliviana")>
+<Assembly: AssemblyProduct("Impuestos Bolivianos .NET")>
 <Assembly: AssemblyCopyright("Copyright © 2017 Alex Erick Pizarro Jimenez")>
 <Assembly: AssemblyTrademark("")>
 <Assembly: ComVisible(False)>

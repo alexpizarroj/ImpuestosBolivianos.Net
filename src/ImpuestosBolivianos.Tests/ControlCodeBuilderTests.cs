@@ -2,7 +2,7 @@
 using System;
 using System.Globalization;
 
-namespace Aepj.FacturacionBoliviana.Tests
+namespace ImpuestosBolivianos.Tests.Tests
 {
     [TestClass]
     public class ControlCodeBuilderTests

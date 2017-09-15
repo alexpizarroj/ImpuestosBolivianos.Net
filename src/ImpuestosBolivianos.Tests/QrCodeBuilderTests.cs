@@ -7,7 +7,7 @@ using ZXing;
 using ZXing.Common;
 using ZXing.QrCode;
 
-namespace Aepj.FacturacionBoliviana.Tests
+namespace ImpuestosBolivianos.Tests.Tests
 {
     [TestClass]
     public class QrCodeBuilderTests
@@ -101,7 +101,7 @@ namespace Aepj.FacturacionBoliviana.Tests
                 .WithImporteVentasNoGravadas(importeVentasNoGravadas)
                 .WithImporteNoSujetoCf(importeNoSujetoCf)
                 .WithDescuentosBonosRebajas(descuentosBonosRebajas)
-                .ToPngImageByteArray();
+                .ToPngByteArray();
             String actual = ReadQrCodeContents(imageBytes);
 
             /*

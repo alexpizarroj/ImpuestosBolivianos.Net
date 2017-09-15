@@ -7,8 +7,8 @@
     <ProjectGuid>{DCFB8EC7-776F-4D4F-9889-21B9C7DE5BF2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aepj.FacturacionBoliviana.Tests</RootNamespace>
-    <AssemblyName>Aepj.FacturacionBoliviana.Tests</AssemblyName>
+    <RootNamespace>ImpuestosBolivianos.Tests</RootNamespace>
+    <AssemblyName>ImpuestosBolivianos.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -93,9 +93,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Aepj.FacturacionBoliviana\Aepj.FacturacionBoliviana.vbproj">
+    <ProjectReference Include="..\ImpuestosBolivianos\ImpuestosBolivianos.vbproj">
       <Project>{b8e6a38c-656e-4f16-a100-ff70cd3f269d}</Project>
-      <Name>Aepj.FacturacionBoliviana</Name>
+      <Name>ImpuestosBolivianos</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

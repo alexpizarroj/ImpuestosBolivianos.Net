@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.Aepj.FacturacionBoliviana.My.MySettings
+        Friend ReadOnly Property Settings() As Global.ImpuestosBolivianos.My.MySettings
             Get
-                Return Global.Aepj.FacturacionBoliviana.My.MySettings.Default
+                Return Global.ImpuestosBolivianos.My.MySettings.Default
             End Get
         End Property
     End Module
