@@ -40,11 +40,15 @@ Public Class ControlCodeBuilder
     End Function
 
     Public Function Build() As String
-        Dim a = New ControlCodeBuilderImpl(_NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave)
-        Return a.Build()
+        Return New ControlCodeBuilderImpl(_NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave).Build()
     End Function
 
     Private Class ControlCodeBuilderImpl
+        Private _BuildStepOneResult As String
+        Private _BuildStepThreeResult As String
+        Private _BuildStepFourResult(0 To 5) As Int32
+        Private _BuildStepFiveResult As String
+        Private _BuildStepSixResult As String
         Private _NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave As String
 
         Public Sub New(
@@ -63,105 +67,92 @@ Public Class ControlCodeBuilder
         End Sub
 
         Public Function Build() As String
-            Dim digitosPaso1 As String = Paso1()
-
-            Paso2(digitosPaso1)
-
-            Dim cadenaAllegedPaso3 As String = Paso3(digitosPaso1)
-
-            Dim sumaTotalPaso4 As Int32 = 0, sumasParcialesPaso4() As Int32 = New Int32(4) {0, 0, 0, 0, 0}
-            Paso4(cadenaAllegedPaso3, sumaTotalPaso4, sumasParcialesPaso4)
-
-            Dim sumatoriaPaso5 As String = Paso5(digitosPaso1, sumaTotalPaso4, sumasParcialesPaso4)
-
-            Dim codigoControl As String = Paso6(digitosPaso1, sumatoriaPaso5)
-
-            Return codigoControl
+            BuildStepOne()
+            BuildStepTwo()
+            BuildStepThree()
+            BuildStepFour()
+            BuildStepFive()
+            BuildStepSix()
+            Return _BuildStepSixResult
         End Function
 
-        Private Function Paso1() As String
-            _NroFactura = AgregarDigitosVerhoeff(_NroFactura, 2)
-            _NitCliente = AgregarDigitosVerhoeff(_NitCliente, 2)
-            _Fecha = AgregarDigitosVerhoeff(_Fecha, 2)
-            _Monto = AgregarDigitosVerhoeff(_Monto, 2)
+        Private Sub BuildStepOne()
+            _NroFactura = AppendVerhoeffDigits(_NroFactura, 2)
+            _NitCliente = AppendVerhoeffDigits(_NitCliente, 2)
+            _Fecha = AppendVerhoeffDigits(_Fecha, 2)
+            _Monto = AppendVerhoeffDigits(_Monto, 2)
 
-            Dim sumaDatos As String = Convert.ToString(
+            Dim dataSum As String = Convert.ToString(
                 Convert.ToInt64(_NroFactura) +
                 Convert.ToInt64(_NitCliente) +
                 Convert.ToInt64(_Fecha) +
                 Convert.ToInt64(_Monto))
-            Dim sumaDatosConVerhoeff As String = AgregarDigitosVerhoeff(sumaDatos, 5)
+            Dim dataSumWithTrailingVerhoeffDigits As String = AppendVerhoeffDigits(dataSum, 5)
 
-            Dim digitosResultado As String = sumaDatosConVerhoeff.Substring(sumaDatos.Length)
-            Return digitosResultado
-        End Function
-
-        Private Function AgregarDigitosVerhoeff(cadena As String, nDigitos As Int32) As String
-            If nDigitos <= 0 Then Return cadena
-
-            Return AgregarDigitosVerhoeff(cadena + CustomVerhoeffDigitCalculator.Get(cadena).ToString(), nDigitos - 1)
-        End Function
-
-        Private Sub Paso2(digitosPaso1 As String)
-            Dim subcadenas(4) As String
-
-            Dim posInicioCorte As Int32 = 0
-            For i As Int32 = 0 To 4
-                Dim longitudCorte As Int32 = Int32.Parse(digitosPaso1(i)) + 1
-                subcadenas(i) = _Llave.Substring(posInicioCorte, longitudCorte)
-                posInicioCorte += longitudCorte
-            Next
-
-            _NroAutorizacion += subcadenas(0)
-            _NroFactura += subcadenas(1)
-            _NitCliente += subcadenas(2)
-            _Fecha += subcadenas(3)
-            _Monto += subcadenas(4)
+            _BuildStepOneResult = dataSumWithTrailingVerhoeffDigits.Substring(dataSum.Length)
         End Sub
 
-        Private Function Paso3(digitosPaso1 As String) As String
-            Dim texto = _NroAutorizacion + _NroFactura + _NitCliente + _Fecha + _Monto
-            Dim llave = _Llave + digitosPaso1
-            Dim resultado = CustomAllegedRC4Cipher.Encode(texto, llave).Replace("-"c, "")
-            Return resultado
+        Private Function AppendVerhoeffDigits(text As String, nDigits As Int32) As String
+            If nDigits <= 0 Then Return text
+            Return AppendVerhoeffDigits(text + CustomVerhoeffDigitCalculator.Get(text).ToString(), nDigits - 1)
         End Function
 
-        Private Sub Paso4(
-                cadenaAllegedPaso3 As String, ByRef sumaTotal As Int32, ByRef sumasParciales() As Int32)
-            sumaTotal = 0
-            For i As Int32 = 0 To (cadenaAllegedPaso3.Length - 1) Step 5
-                For j As Int32 = 0 To 4
+        Private Sub BuildStepTwo()
+            Dim cuts(4) As String
+            Dim cutStartingPos As Int32 = 0
+            For i As Int32 = 0 To 4
+                Dim cutLength As Int32 = Int32.Parse(_BuildStepOneResult(i)) + 1
+                cuts(i) = _Llave.Substring(cutStartingPos, cutLength)
+                cutStartingPos += cutLength
+            Next
+
+            _NroAutorizacion += cuts(0)
+            _NroFactura += cuts(1)
+            _NitCliente += cuts(2)
+            _Fecha += cuts(3)
+            _Monto += cuts(4)
+        End Sub
+
+        Private Sub BuildStepThree()
+            Dim text = _NroAutorizacion + _NroFactura + _NitCliente + _Fecha + _Monto
+            Dim key = _Llave + _BuildStepOneResult
+            _BuildStepThreeResult = CustomAllegedRC4Cipher.Encode(text, key).Replace("-"c, "")
+        End Sub
+
+        Private Sub BuildStepFour()
+            For i As Int32 = 0 To (_BuildStepFourResult.Length - 1)
+                _BuildStepFourResult(i) = 0
+            Next
+
+            For i As Int32 = 0 To (_BuildStepThreeResult.Length - 1) Step 5
+                For j As Int32 = 1 To 5
                     Dim k = i + j
-                    If (k < cadenaAllegedPaso3.Length) Then
-                        Dim valor = Convert.ToInt32(cadenaAllegedPaso3(k))
-                        sumaTotal += valor
-                        sumasParciales(j) += valor
+                    If (k < _BuildStepThreeResult.Length) Then
+                        Dim value = Convert.ToInt32(_BuildStepThreeResult(k))
+                        _BuildStepFourResult(0) += value
+                        _BuildStepFourResult(j) += value
                     End If
                 Next
             Next
         End Sub
 
-        Private Function Paso5(
-            digitosPaso1 As String, sumaTotalPaso4 As Int32, sumasParcialesPaso4() As Int32) _
-        As String
-            Dim suma As Int64 = 0
-            For i As Int32 = 0 To 4
-                Dim valor As Int64 = sumaTotalPaso4
-                valor = valor * sumasParcialesPaso4(i)
-                valor = valor \ (Int32.Parse(digitosPaso1(i)) + 1)
-                suma += valor
+        Private Sub BuildStepFive()
+            Dim sum As Int64 = 0
+            For i As Int32 = 1 To 5
+                Dim value As Int64 = _BuildStepFourResult(0)
+                value = value * _BuildStepFourResult(i)
+                value = value \ (Int32.Parse(_BuildStepOneResult(i)) + 1)
+                sum += value
             Next
 
-            Dim resultado = CustomBase64Encoder.Encode(suma)
-            Return resultado
-        End Function
+            _BuildStepFiveResult = CustomBase64Encoder.Encode(sum)
+        End Sub
 
-        Private Function Paso6(digitosPaso1 As String, sumatoriaPaso5 As String) As String
-            Dim texto = sumatoriaPaso5
-            Dim llave = _Llave + digitosPaso1
-            Dim resultado = CustomAllegedRC4Cipher.Encode(texto, llave)
-            Return resultado
-        End Function
+        Private Sub BuildStepSix()
+            Dim text = _BuildStepFiveResult
+            Dim key = _Llave + _BuildStepOneResult
+            _BuildStepSixResult = CustomAllegedRC4Cipher.Encode(text, key)
+        End Sub
     End Class
 End Class
 
