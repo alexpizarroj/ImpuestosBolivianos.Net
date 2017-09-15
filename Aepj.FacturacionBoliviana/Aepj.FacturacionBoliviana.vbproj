@@ -101,9 +101,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlCodeBuilder.vb" />
-    <Compile Include="AllegedRC4Cipher.vb" />
-    <Compile Include="Base64Encoder.vb" />
-    <Compile Include="VerhoeffDigitCalculator.vb" />
+    <Compile Include="ImpuestosNacionales\CustomAllegedRC4Cipher.vb" />
+    <Compile Include="ImpuestosNacionales\CustomBase64Encoder.vb" />
+    <Compile Include="ImpuestosNacionales\CustomVerhoeffDigitCalculator.vb" />
     <Compile Include="QrCodeBuilder.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -146,6 +146,7 @@
     <Content Include="libs\Gma.QrCodeNet.Encoding.Net35\Gma.QrCodeNet.Encoding.Net35.pdb" />
     <Content Include="libs\Gma.QrCodeNet.Encoding.Net35\Gma.QrCodeNet.Encoding.Net35.XML" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

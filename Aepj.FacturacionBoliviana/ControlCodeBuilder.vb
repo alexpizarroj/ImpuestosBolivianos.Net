@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
+Imports Aepj.FacturacionBoliviana.ImpuestosNacionales
 
 <ComVisible(True)>
 <ComClass(ControlCodeBuilder.ClassId, ControlCodeBuilder.InterfaceId, ControlCodeBuilder.EventsId)>
@@ -7,9 +8,6 @@ Public Class ControlCodeBuilder
     Public Const InterfaceId As String = "A77BE2F8-CE32-4C19-8507-366031BE5FDE"
     Public Const EventsId As String = "CBE8E013-BD3F-481D-8F4A-C4A90730DDAB"
     Private _NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave As String
-
-    Public Sub New()
-    End Sub
 
     Public Function WithNroAutorizacion(nroAutorizacion As String) As ControlCodeBuilder
         _NroAutorizacion = nroAutorizacion
@@ -101,7 +99,7 @@ Public Class ControlCodeBuilder
         Private Function AgregarDigitosVerhoeff(cadena As String, nDigitos As Int32) As String
             If nDigitos <= 0 Then Return cadena
 
-            Return AgregarDigitosVerhoeff(cadena + VerhoeffDigitCalculator.Get(cadena).ToString(), nDigitos - 1)
+            Return AgregarDigitosVerhoeff(cadena + CustomVerhoeffDigitCalculator.Get(cadena).ToString(), nDigitos - 1)
         End Function
 
         Private Sub Paso2(digitosPaso1 As String)
@@ -124,7 +122,7 @@ Public Class ControlCodeBuilder
         Private Function Paso3(digitosPaso1 As String) As String
             Dim texto = _NroAutorizacion + _NroFactura + _NitCliente + _Fecha + _Monto
             Dim llave = _Llave + digitosPaso1
-            Dim resultado = AllegedRC4Cipher.Encode(texto, llave).Replace("-"c, "")
+            Dim resultado = CustomAllegedRC4Cipher.Encode(texto, llave).Replace("-"c, "")
             Return resultado
         End Function
 
@@ -154,14 +152,14 @@ Public Class ControlCodeBuilder
                 suma += valor
             Next
 
-            Dim resultado = Base64Encoder.Encode(suma)
+            Dim resultado = CustomBase64Encoder.Encode(suma)
             Return resultado
         End Function
 
         Private Function Paso6(digitosPaso1 As String, sumatoriaPaso5 As String) As String
             Dim texto = sumatoriaPaso5
             Dim llave = _Llave + digitosPaso1
-            Dim resultado = AllegedRC4Cipher.Encode(texto, llave)
+            Dim resultado = CustomAllegedRC4Cipher.Encode(texto, llave)
             Return resultado
         End Function
     End Class
