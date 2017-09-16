@@ -14,17 +14,15 @@ namespace ImpuestosBolivianos.Tests.Tests
             set { testContextInstance = value; }
         }
 
-        private static CultureInfo EnUsCulture => CultureInfo.CreateSpecificCulture("en-US");
-        private static CultureInfo EsBoCulture => CultureInfo.CreateSpecificCulture("es-BO");
-
         [TestMethod]
         [DeploymentItem("Testcases\\ControlCodeV7-5000TCs.csv")]
+        [DeploymentItem("Testcases\\Schema.ini")]
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
             "|DataDirectory|\\Testcases\\ControlCodeV7-5000TCs.csv",
             "ControlCodeV7-5000TCs#csv", DataAccessMethod.Sequential
         )]
-        public void Text_InputFromOfficial5000ControlCodeTestCases_AllShouldPass()
+        public void Text_InputFromControlCodeV7TCs_AllShouldPass()
         {
             var invoice = CurrentInvoiceOnTestContext();
             String expected = Convert.ToString(TestContext.DataRow["CodigoControl"]);
@@ -42,8 +40,8 @@ namespace ImpuestosBolivianos.Tests.Tests
                 NroAutorizacion = Convert.ToInt64(TestContext.DataRow["NroAutorizacion"]),
                 NroFactura = Convert.ToInt64(TestContext.DataRow["NroFactura"]),
                 NitCliente = Convert.ToString(TestContext.DataRow["NitCliente"]),
-                Fecha = Convert.ToDateTime(TestContext.DataRow["Fecha"], EsBoCulture),
-                ImporteTotal = Convert.ToDecimal(TestContext.DataRow["Monto"], EnUsCulture),
+                Fecha = Convert.ToDateTime(TestContext.DataRow["Fecha"], CultureInfo.InvariantCulture),
+                ImporteTotal = Convert.ToDecimal(TestContext.DataRow["Monto"], CultureInfo.InvariantCulture),
                 LlaveDosificacion = Convert.ToString(TestContext.DataRow["Llave"])
             };
         }

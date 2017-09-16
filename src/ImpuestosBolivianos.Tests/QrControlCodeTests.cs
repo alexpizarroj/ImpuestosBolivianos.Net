@@ -19,17 +19,15 @@ namespace ImpuestosBolivianos.Tests
             set { testContextInstance = value; }
         }
 
-        private static CultureInfo EnUsCulture => CultureInfo.CreateSpecificCulture("en-US");
-        private static CultureInfo EsBoCulture => CultureInfo.CreateSpecificCulture("es-BO");
-
         [TestMethod]
         [DeploymentItem("Testcases\\QrControlCode-5000TCs.csv")]
+        [DeploymentItem("Testcases\\Schema.ini")]
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
             "|DataDirectory|\\Testcases\\QrControlCode-5000TCs.csv",
             "QrControlCode-5000TCs#csv", DataAccessMethod.Sequential
         )]
-        public void Text_InputFromDerived5000QrCodeTestCases_AllShouldPass()
+        public void Text_InputFromQrControlCodeTCs_AllShouldPass()
         {
             var invoice = CurrentInvoiceOnTestContext();
             String expected = Convert.ToString(TestContext.DataRow["ContenidoCodigoQr"]);
@@ -42,12 +40,13 @@ namespace ImpuestosBolivianos.Tests
 
         [TestMethod]
         [DeploymentItem("Testcases\\QrControlCode-5000TCs.csv")]
+        [DeploymentItem("Testcases\\Schema.ini")]
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
             "|DataDirectory|\\Testcases\\QrControlCode-5000TCs.csv",
             "QrControlCode-5000TCs#csv", DataAccessMethod.Sequential
         )]
-        public void ToPngByteArray_InputFromDerived5000QrCodeTestCases_AllShouldPass()
+        public void ToPngByteArray_InputFromQrControlCodeTCs_AllShouldPass()
         {
             var invoice = CurrentInvoiceOnTestContext();
             String expected = Convert.ToString(TestContext.DataRow["ContenidoCodigoQr"]);
@@ -63,22 +62,31 @@ namespace ImpuestosBolivianos.Tests
             if (actual != null) Assert.AreEqual(expected, actual);
         }
 
+        private readonly CultureInfo BolivianCultureInfo = CultureInfo.CreateSpecificCulture("es-BO");
+
         private Invoice CurrentInvoiceOnTestContext()
         {
             return new Invoice()
             {
+                NitEmisor = Convert.ToString(TestContext.DataRow["NitEmisor"]),
                 NroAutorizacion = Convert.ToInt64(TestContext.DataRow["NroAutorizacion"]),
                 NroFactura = Convert.ToInt64(TestContext.DataRow["NroFactura"]),
                 NitCliente = Convert.ToString(TestContext.DataRow["NitCliente"]),
-                Fecha = Convert.ToDateTime(TestContext.DataRow["Fecha"], EsBoCulture),
-                ImporteTotal = Convert.ToDecimal(TestContext.DataRow["ImporteTotal"], EnUsCulture),
                 CodigoControl = Convert.ToString(TestContext.DataRow["CodigoControl"]),
-                NitEmisor = Convert.ToString(TestContext.DataRow["NitEmisor"]),
-                ImporteBaseCf = Convert.ToDecimal(TestContext.DataRow["ImporteBaseCf"], EnUsCulture),
-                ImporteIceIehdTasas = Convert.ToDecimal(TestContext.DataRow["ImporteIceIehdTasas"]),
-                ImporteVentasNoGravadas = Convert.ToDecimal(TestContext.DataRow["ImporteVentasNoGravadas"]),
-                ImporteNoSujetoCf = Convert.ToDecimal(TestContext.DataRow["ImporteNoSujetoCf"]),
-                DescuentosBonosRebajas = Convert.ToDecimal(TestContext.DataRow["DescuentosBonosRebajas"])
+                Fecha = Convert.ToDateTime(
+                    TestContext.DataRow["Fecha"], BolivianCultureInfo),
+                ImporteTotal = Convert.ToDecimal(
+                    TestContext.DataRow["ImporteTotal"], CultureInfo.InvariantCulture),
+                ImporteBaseCf = Convert.ToDecimal(
+                    TestContext.DataRow["ImporteBaseCf"], CultureInfo.InvariantCulture),
+                ImporteIceIehdTasas = Convert.ToDecimal(
+                    TestContext.DataRow["ImporteIceIehdTasas"], CultureInfo.InvariantCulture),
+                ImporteVentasNoGravadas = Convert.ToDecimal(
+                    TestContext.DataRow["ImporteVentasNoGravadas"], CultureInfo.InvariantCulture),
+                ImporteNoSujetoCf = Convert.ToDecimal(
+                    TestContext.DataRow["ImporteNoSujetoCf"], CultureInfo.InvariantCulture),
+                DescuentosBonosRebajas = Convert.ToDecimal(
+                    TestContext.DataRow["DescuentosBonosRebajas"], CultureInfo.InvariantCulture)
             };
         }
 
