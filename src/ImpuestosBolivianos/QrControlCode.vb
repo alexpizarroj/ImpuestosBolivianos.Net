@@ -6,69 +6,57 @@ Imports Gma.QrCodeNet.Encoding
 Imports Gma.QrCodeNet.Encoding.Windows.Render
 
 Public Class QrControlCode
-    Private ReadOnly ImpuestosNacionalesNFI As New NumberFormatInfo With
-        {.NumberDecimalSeparator = ".", .NumberGroupSeparator = "", .NumberDecimalDigits = 2}
-    Private ReadOnly ResultingImageFormat As ImageFormat = ImageFormat.Png
-
-    Private _NroAutorizacion, _NroFactura As String
-    Private _Fecha, _CodigoControl As String
-    Private _NitEmisor, _NitCliente As String
-    Private _ImporteTotal, _ImporteBaseCf As String
-    Private _ImporteIceIehdTasas, _ImporteVentasNoGravadas As String
-    Private _ImporteNoSujetoCf, _DescuentosBonosRebajas As String
-
     Public Sub New(invoice As Invoice)
         invoice.AssertHasEnoughInfoToRenderQrCode()
 
-        _NroAutorizacion = invoice.NroAutorizacion.ToString()
-        _NroFactura = invoice.NroFactura.ToString()
-        _Fecha = StringifyQrCodeTextContentElement(invoice.Fecha)
-        _CodigoControl = invoice.CodigoControl
-        _NitEmisor = invoice.NitEmisor
-        _NitCliente = invoice.NitCliente
-        _ImporteTotal = StringifyQrCodeTextContentElement(invoice.ImporteTotal)
-        _ImporteBaseCf = StringifyQrCodeTextContentElement(invoice.ImporteBaseCf)
-        _ImporteIceIehdTasas = StringifyQrCodeTextContentElement(invoice.ImporteIceIehdTasas)
-        _ImporteVentasNoGravadas = StringifyQrCodeTextContentElement(invoice.ImporteVentasNoGravadas)
-        _ImporteNoSujetoCf = StringifyQrCodeTextContentElement(invoice.ImporteNoSujetoCf)
-        _DescuentosBonosRebajas = StringifyQrCodeTextContentElement(invoice.DescuentosBonosRebajas)
+        Dim nroAutorizacion = invoice.NroAutorizacion.ToString()
+        Dim nroFactura = invoice.NroFactura.ToString()
+        Dim fecha = invoice.Fecha.ToString("dd/MM/yyyy")
+        Dim codigoControl = invoice.CodigoControl
+        Dim nitEmisor = invoice.NitEmisor
+        Dim nitCliente = invoice.NitCliente
+        Dim importeTotal = StringifyDecimal(invoice.ImporteTotal)
+        Dim importeBaseCf = StringifyDecimal(invoice.ImporteBaseCf)
+        Dim importeIceIehdTasas = StringifyDecimal(invoice.ImporteIceIehdTasas)
+        Dim importeVentasNoGravadas = StringifyDecimal(invoice.ImporteVentasNoGravadas)
+        Dim importeNoSujetoCf = StringifyDecimal(invoice.ImporteNoSujetoCf)
+        Dim descuentosBonosRebajas = StringifyDecimal(invoice.DescuentosBonosRebajas)
+
+        Dim textElements = New String() {
+            nitEmisor,
+            nroFactura,
+            nroAutorizacion,
+            fecha,
+            importeTotal,
+            importeBaseCf,
+            codigoControl,
+            nitCliente,
+            importeIceIehdTasas,
+            importeVentasNoGravadas,
+            importeNoSujetoCf,
+            descuentosBonosRebajas
+        }
+        Text = String.Join("|", textElements)
     End Sub
 
-    Private Function StringifyQrCodeTextContentElement(value As Double) As String
+    Public ReadOnly Property Text As String
+
+    Private ReadOnly Property ImpuestosNacionalesNFI As New NumberFormatInfo With
+        {.NumberDecimalSeparator = ".", .NumberGroupSeparator = "", .NumberDecimalDigits = 2}
+
+    Private ReadOnly Property ResultingImageFormat As ImageFormat = ImageFormat.Png
+
+    Private Function StringifyDecimal(value As Decimal) As String
         ' value <= 0: "No corresponde"; se pone exactamente "0"
         If (value <= 0) Then Return "0"
         ' value > 0: Formatear con dos decimas, usando "." como separador decimal
         Return value.ToString("0.00", ImpuestosNacionalesNFI)
     End Function
 
-    Private Function StringifyQrCodeTextContentElement(value As DateTime) As String
-        Return value.ToString("dd/MM/yyyy")
-    End Function
-
-    Public ReadOnly Property TextContents As String
-        Get
-            Dim parts = New String() {
-                _NitEmisor,
-                _NroFactura,
-                _NroAutorizacion,
-                _Fecha,
-                _ImporteTotal,
-                _ImporteBaseCf,
-                _CodigoControl,
-                _NitCliente,
-                _ImporteIceIehdTasas,
-                _ImporteVentasNoGravadas,
-                _ImporteNoSujetoCf,
-                _DescuentosBonosRebajas
-            }
-            Return String.Join("|", parts)
-        End Get
-    End Property
-
     Public Function ToPngByteArray() As Byte()
         Dim encoder As New QrEncoder(ErrorCorrectionLevel.M)
         Dim resultingQrCode As QrCode = Nothing
-        encoder.TryEncode(TextContents, resultingQrCode)
+        encoder.TryEncode(Text, resultingQrCode)
 
         Const moduleSizeInPixels As Int32 = 5
         Dim renderer As New GraphicsRenderer(

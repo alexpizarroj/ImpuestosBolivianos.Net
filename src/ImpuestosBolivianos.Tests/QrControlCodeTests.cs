@@ -29,13 +29,13 @@ namespace ImpuestosBolivianos.Tests
             "|DataDirectory|\\csv\\5000CasosPruebaDerivadosCodigoQr.csv",
             "5000CasosPruebaDerivadosCodigoQr#csv", DataAccessMethod.Sequential
         )]
-        public void TextContents_InputFromDerived5000QrCodeTestCases_AllShouldPass()
+        public void Text_InputFromDerived5000QrCodeTestCases_AllShouldPass()
         {
             var invoice = CurrentInvoiceOnTestContext();
             String expected = Convert.ToString(TestContext.DataRow["ContenidoCodigoQr"]);
 
             var sut = new QrControlCode(invoice);
-            String actual = sut.TextContents;
+            String actual = sut.Text;
 
             Assert.AreEqual(expected, actual);
         }
