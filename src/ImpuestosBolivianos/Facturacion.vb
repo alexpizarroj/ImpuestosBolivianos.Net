@@ -18,7 +18,7 @@
             .ImporteTotal = monto,
             .LlaveDosificacion = llave
         }
-        Return New ControlCode(invoice).ToString()
+        Return New ControlCode(invoice).Text
     End Function
 
     Public Shared Function RenderPngQrCode(
