@@ -55,15 +55,12 @@ namespace ImpuestosBolivianos.Tests
             var sut = new QrControlCode(invoice);
             String actual = ReadQrCodeContents(sut.ToPngByteArray());
 
-            if (actual != null)
-            {
-                /*
-                 * Test for equality *only* if we have a reading (i.e. actual != null).
-                 * For some reason, a small chunk of the QR codes coming from
-                 * the testcase set are not being recognized by ZXing.
-                 */
-                Assert.AreEqual(expected, actual);
-            }
+            /*
+            * Test for equality *only* if we have a reading (i.e. actual != null).
+            * For some reason, a small chunk of the QR codes coming from
+            * the testcase set are not being recognized by ZXing.
+            */
+            if (actual != null) Assert.AreEqual(expected, actual);
         }
 
         private Invoice CurrentInvoiceOnTestContext()

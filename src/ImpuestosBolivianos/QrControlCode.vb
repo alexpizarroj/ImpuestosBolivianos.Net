@@ -1,8 +1,9 @@
 ﻿Imports System.Drawing
 Imports System.Drawing.Imaging
 Imports System.IO
-Imports Gma.QrCodeNet.Encoding
-Imports Gma.QrCodeNet.Encoding.Windows.Render
+Imports ZXing
+Imports ZXing.QrCode
+Imports ZXing.QrCode.Internal
 
 Public Class QrControlCode
     Public Sub New(invoice As Invoice)
@@ -40,17 +41,24 @@ Public Class QrControlCode
 
     Public ReadOnly Property Text As String
 
+    Private Shared ReadOnly Property QrCodeWriterOptions As New QrCodeEncodingOptions With
+    {
+        .ErrorCorrection = ErrorCorrectionLevel.M,
+        .DisableECI = True,
+        .CharacterSet = "UTF-8",
+        .Width = 256,
+        .Height = 256
+    }
+
+    Private Shared ReadOnly Property QrCodeWriter As New BarcodeWriter With {
+        .Format = BarcodeFormat.QR_CODE,
+        .Options = QrCodeWriterOptions
+    }
+
     Public Function ToPngByteArray() As Byte()
-        Dim encoder As New QrEncoder(ErrorCorrectionLevel.M)
-        Dim resultingQrCode As QrCode = Nothing
-        encoder.TryEncode(Text, resultingQrCode)
-
-        Const moduleSizeInPixels As Int32 = 5
-        Dim renderer As New GraphicsRenderer(
-            New FixedModuleSize(moduleSizeInPixels, QuietZoneModules.Two), Brushes.Black, Brushes.White)
-
-        Using mstream = New MemoryStream()
-            renderer.WriteToStream(resultingQrCode.Matrix, ImageFormat.Png, mstream)
+        Using bitmap = QrCodeWriter.Write(Text)
+            Dim mstream = New MemoryStream()
+            bitmap.Save(mstream, ImageFormat.Png)
             Return mstream.ToArray()
         End Using
     End Function
