@@ -1,23 +1,19 @@
 ﻿Public Class ControlCode
-    Private _ControlCode As String
-
     Public Sub New(invoice As Invoice)
         invoice.AssertHasEnoughInfoToMakeCodigoControl()
 
         Dim nroAutorizacion = invoice.NroAutorizacion.ToString()
         Dim nroFactura = invoice.NroFactura.ToString()
         Dim nitCliente = invoice.NitCliente
-        Dim fecha = invoice.Fecha.ToString("yyyyMMdd")
-        Dim monto = Math.Round(invoice.ImporteTotal, 0, MidpointRounding.AwayFromZero).ToString()
+        Dim fecha = LawConventions.ControlCode.StringifyDateTime(invoice.Fecha)
+        Dim importeTotal = LawConventions.ControlCode.RoundImporteTotal(invoice.ImporteTotal).ToString()
         Dim llave = invoice.LlaveDosificacion
 
-        Dim builder = New ControlCodeBuilder(nroAutorizacion, nroFactura, nitCliente, fecha, monto, llave)
-        _ControlCode = builder.Build()
+        Dim builder = New ControlCodeBuilder(nroAutorizacion, nroFactura, nitCliente, fecha, importeTotal, llave)
+        Text = builder.Build()
     End Sub
 
-    Public Overrides Function ToString() As String
-        Return _ControlCode
-    End Function
+    Public ReadOnly Property Text As String
 
     Private Class ControlCodeBuilder
         Private _BuildStepOneResult As String

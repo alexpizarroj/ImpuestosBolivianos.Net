@@ -100,6 +100,7 @@
     <Import Include="System.Diagnostics" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LawConventions.vb" />
     <Compile Include="Facturacion.vb" />
     <Compile Include="ControlCode.vb" />
     <Compile Include="COM\Facturacion.vb" />

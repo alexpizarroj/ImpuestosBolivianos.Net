@@ -24,13 +24,13 @@ namespace ImpuestosBolivianos.Tests.Tests
             "|DataDirectory|\\csv\\5000CasosPruebaCCVer7.csv",
             "5000CasosPruebaCCVer7#csv", DataAccessMethod.Sequential
         )]
-        public void ToString_InputFromOfficial5000ControlCodeTestCases_AllShouldPass()
+        public void Text_InputFromOfficial5000ControlCodeTestCases_AllShouldPass()
         {
             var invoice = CurrentInvoiceOnTestContext();
             String expected = Convert.ToString(TestContext.DataRow["CodigoControl"]);
 
             var sut = new ControlCode(invoice);
-            String actual = sut.ToString();
+            String actual = sut.Text;
 
             Assert.AreEqual(expected, actual);
         }
