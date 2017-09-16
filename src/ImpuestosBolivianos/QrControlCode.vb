@@ -44,10 +44,8 @@ Public Class QrControlCode
     Private Shared ReadOnly Property QrCodeWriterOptions As New QrCodeEncodingOptions With
     {
         .ErrorCorrection = ErrorCorrectionLevel.M,
-        .DisableECI = True,
-        .CharacterSet = "UTF-8",
-        .Width = 256,
-        .Height = 256
+        .Width = 400,
+        .Height = 400
     }
 
     Private Shared ReadOnly Property QrCodeWriter As New BarcodeWriter With {
