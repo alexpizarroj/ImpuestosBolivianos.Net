@@ -18,11 +18,11 @@ namespace ImpuestosBolivianos.Tests.Tests
         private static CultureInfo EsBoCulture => CultureInfo.CreateSpecificCulture("es-BO");
 
         [TestMethod]
-        [DeploymentItem("csv\\5000CasosPruebaCCVer7.csv")]
+        [DeploymentItem("Testcases\\ControlCodeV7-5000TCs.csv")]
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "|DataDirectory|\\csv\\5000CasosPruebaCCVer7.csv",
-            "5000CasosPruebaCCVer7#csv", DataAccessMethod.Sequential
+            "|DataDirectory|\\Testcases\\ControlCodeV7-5000TCs.csv",
+            "ControlCodeV7-5000TCs#csv", DataAccessMethod.Sequential
         )]
         public void Text_InputFromOfficial5000ControlCodeTestCases_AllShouldPass()
         {

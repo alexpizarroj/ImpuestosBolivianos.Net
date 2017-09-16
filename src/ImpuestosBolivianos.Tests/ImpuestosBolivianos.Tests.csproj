@@ -79,16 +79,20 @@
     <Compile Include="QrControlCodeTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="csv\5000CasosPruebaCCVer7.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="csv\5000CasosPruebaCCVer7.xlsx" />
-    <None Include="csv\5000CasosPruebaDerivadosCodigoQr.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="csv\5000CasosPruebaDerivadosCodigoQr.xlsm" />
     <None Include="packages.config" />
-    <None Include="csv\Schema.ini">
+    <None Include="Testcases\ControlCodeV7-5000TCs.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Testcases\ControlCodeV7-5000TCs.xlsx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Testcases\QrControlCode-5000TCs.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Testcases\QrControlCode-5000TCs.xlsm">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Testcases\Schema.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -23,11 +23,11 @@ namespace ImpuestosBolivianos.Tests
         private static CultureInfo EsBoCulture => CultureInfo.CreateSpecificCulture("es-BO");
 
         [TestMethod]
-        [DeploymentItem("csv\\5000CasosPruebaDerivadosCodigoQr.csv")]
+        [DeploymentItem("Testcases\\QrControlCode-5000TCs.csv")]
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "|DataDirectory|\\csv\\5000CasosPruebaDerivadosCodigoQr.csv",
-            "5000CasosPruebaDerivadosCodigoQr#csv", DataAccessMethod.Sequential
+            "|DataDirectory|\\Testcases\\QrControlCode-5000TCs.csv",
+            "QrControlCode-5000TCs#csv", DataAccessMethod.Sequential
         )]
         public void Text_InputFromDerived5000QrCodeTestCases_AllShouldPass()
         {
@@ -41,11 +41,11 @@ namespace ImpuestosBolivianos.Tests
         }
 
         [TestMethod]
-        [DeploymentItem("csv\\5000CasosPruebaDerivadosCodigoQr.csv")]
+        [DeploymentItem("Testcases\\QrControlCode-5000TCs.csv")]
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "|DataDirectory|\\csv\\5000CasosPruebaDerivadosCodigoQr.csv",
-            "5000CasosPruebaDerivadosCodigoQr#csv", DataAccessMethod.Sequential
+            "|DataDirectory|\\Testcases\\QrControlCode-5000TCs.csv",
+            "QrControlCode-5000TCs#csv", DataAccessMethod.Sequential
         )]
         public void ToPngByteArray_InputFromDerived5000QrCodeTestCases_AllShouldPass()
         {

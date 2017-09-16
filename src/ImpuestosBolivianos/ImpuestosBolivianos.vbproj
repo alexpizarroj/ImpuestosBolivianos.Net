@@ -107,6 +107,7 @@
     <Compile Include="CustomBase64Encoder.vb" />
     <Compile Include="CustomVerhoeffDigitCalculator.vb" />
     <Compile Include="Invoice.vb" />
+    <Compile Include="MontoEnLiteral.vb" />
     <Compile Include="QrControlCode.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
