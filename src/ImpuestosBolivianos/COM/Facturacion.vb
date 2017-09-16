@@ -13,19 +13,17 @@ Namespace COM
             nroFactura As String,
             nitCliente As String,
             fecha As DateTime,
-            monto As String,
+            monto As Double,
             llave As String
         ) As String
-            Dim builder = New ControlCodeBuilder()
-            With builder
-                .WithNroAutorizacion(nroAutorizacion)
-                .WithNroFactura(nroFactura)
-                .WithNitCliente(nitCliente)
-                .WithFecha(fecha)
-                .WithMonto(Convert.ToDouble(monto))
-                .WithLlave(llave)
-            End With
-            Return builder.Build()
+            Return ImpuestosBolivianos.Facturacion.MakeControlCode(
+                Convert.ToInt64(nroAutorizacion),
+                Convert.ToInt64(nroFactura),
+                nitCliente,
+                fecha,
+                Convert.ToDecimal(monto),
+                llave
+            )
         End Function
 
         Public Function RenderPngQrCode(
@@ -33,31 +31,29 @@ Namespace COM
             nroFactura As String,
             nitCliente As String,
             fecha As DateTime,
-            importeTotal As String,
+            importeTotal As Double,
             codigoControl As String,
             nitEmisor As String,
-            importeBaseCf As String,
-            Optional importeIceIehdTasas As String = "0",
-            Optional importeVentasNoGravadas As String = "0",
-            Optional importeNoSujetoCf As String = "0",
-            Optional descuentosBonosRebajas As String = "0"
+            importeBaseCf As Double,
+            Optional importeIceIehdTasas As Double = 0.0,
+            Optional importeVentasNoGravadas As Double = 0.0,
+            Optional importeNoSujetoCf As Double = 0.0,
+            Optional descuentosBonosRebajas As Double = 0.0
         ) As Byte()
-            Dim builder = New QrCodeBuilder()
-            With builder
-                .WithNroAutorizacion(nroAutorizacion)
-                .WithNroFactura(nroFactura)
-                .WithNitCliente(nitCliente)
-                .WithFecha(fecha)
-                .WithImporteTotal(Convert.ToDouble(importeTotal))
-                .WithCodigoControl(codigoControl)
-                .WithNitEmisor(nitEmisor)
-                .WithImporteBaseCf(Convert.ToDouble(importeBaseCf))
-                .WithImporteIceIehdTasas(Convert.ToDouble(importeIceIehdTasas))
-                .WithImporteVentasNoGravadas(Convert.ToDouble(importeVentasNoGravadas))
-                .WithImporteNoSujetoCf(Convert.ToDouble(importeNoSujetoCf))
-                .WithDescuentosBonosRebajas(Convert.ToDouble(descuentosBonosRebajas))
-            End With
-            Return builder.ToPngByteArray()
+            Return ImpuestosBolivianos.Facturacion.RenderPngQrCode(
+                Convert.ToInt64(nroAutorizacion),
+                Convert.ToInt64(nroFactura),
+                nitCliente,
+                fecha,
+                Convert.ToDecimal(importeTotal),
+                codigoControl,
+                nitEmisor,
+                Convert.ToDecimal(importeBaseCf),
+                Convert.ToDecimal(importeIceIehdTasas),
+                Convert.ToDecimal(importeVentasNoGravadas),
+                Convert.ToDecimal(importeNoSujetoCf),
+                Convert.ToDecimal(descuentosBonosRebajas)
+            )
         End Function
     End Class
 End Namespace

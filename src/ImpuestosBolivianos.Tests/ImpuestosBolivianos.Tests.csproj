@@ -74,9 +74,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlCodeBuilderTests.cs" />
+    <Compile Include="ControlCodeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QrCodeBuilderTests.cs" />
+    <Compile Include="QrControlCodeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="csv\5000CasosPruebaCCVer7.csv">

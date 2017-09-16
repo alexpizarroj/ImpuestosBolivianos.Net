@@ -1,41 +1,25 @@
-﻿Public Class ControlCodeBuilder
-    Private _NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave As String
+﻿Public Class ControlCode
+    Private _ControlCode As String
 
-    Public Function WithNroAutorizacion(nroAutorizacion As String) As ControlCodeBuilder
-        _NroAutorizacion = nroAutorizacion
-        Return Me
+    Public Sub New(invoice As Invoice)
+        invoice.AssertHasEnoughInfoToMakeCodigoControl()
+
+        Dim nroAutorizacion = invoice.NroAutorizacion.ToString()
+        Dim nroFactura = invoice.NroFactura.ToString()
+        Dim nitCliente = invoice.NitCliente
+        Dim fecha = invoice.Fecha.ToString("yyyyMMdd")
+        Dim monto = Math.Round(invoice.ImporteTotal, 0, MidpointRounding.AwayFromZero).ToString()
+        Dim llave = invoice.LlaveDosificacion
+
+        Dim builder = New ControlCodeBuilder(nroAutorizacion, nroFactura, nitCliente, fecha, monto, llave)
+        _ControlCode = builder.Build()
+    End Sub
+
+    Public Overrides Function ToString() As String
+        Return _ControlCode
     End Function
 
-    Public Function WithNroFactura(nroFactura As String) As ControlCodeBuilder
-        _NroFactura = nroFactura
-        Return Me
-    End Function
-
-    Public Function WithNitCliente(nitCliente As String) As ControlCodeBuilder
-        _NitCliente = nitCliente
-        Return Me
-    End Function
-
-    Public Function WithFecha(fecha As DateTime) As ControlCodeBuilder
-        _Fecha = fecha.ToString("yyyyMMdd")
-        Return Me
-    End Function
-
-    Public Function WithMonto(monto As Double) As ControlCodeBuilder
-        _Monto = Math.Round(monto, 0, MidpointRounding.AwayFromZero).ToString()
-        Return Me
-    End Function
-
-    Public Function WithLlave(llave As String) As ControlCodeBuilder
-        _Llave = llave
-        Return Me
-    End Function
-
-    Public Function Build() As String
-        Return New ControlCodeBuilderImpl(_NroAutorizacion, _NroFactura, _NitCliente, _Fecha, _Monto, _Llave).Build()
-    End Function
-
-    Private Class ControlCodeBuilderImpl
+    Private Class ControlCodeBuilder
         Private _BuildStepOneResult As String
         Private _BuildStepThreeResult As String
         Private _BuildStepFourResult(5) As Int32
