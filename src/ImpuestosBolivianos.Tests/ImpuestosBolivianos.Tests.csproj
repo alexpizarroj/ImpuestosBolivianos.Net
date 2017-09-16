@@ -96,10 +96,7 @@
     <None Include="Testcases\Schema.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Testcases\SpanishNumericStrings-BusinessWritingsTCs.csv">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="Testcases\SpanishNumericStrings-RegularWritingsTCs.csv">
+    <None Include="Testcases\SpanishNumericStringsTCs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

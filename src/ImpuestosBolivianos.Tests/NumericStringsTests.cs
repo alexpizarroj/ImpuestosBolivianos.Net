@@ -14,12 +14,12 @@ namespace ImpuestosBolivianos.Tests
         }
 
         [TestMethod]
-        [DeploymentItem("Testcases\\SpanishNumericStrings-BusinessWritingsTCs.csv")]
+        [DeploymentItem("Testcases\\SpanishNumericStringsTCs.csv")]
         [DeploymentItem("Testcases\\Schema.ini")]
         [DataSource(
             "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "|DataDirectory|\\Testcases\\SpanishNumericStrings-BusinessWritingsTCs.csv",
-            "SpanishNumericStrings-BusinessWritingsTCs#csv", DataAccessMethod.Sequential
+            "|DataDirectory|\\Testcases\\SpanishNumericStringsTCs.csv",
+            "SpanishNumericStringsTCs#csv", DataAccessMethod.Sequential
         )]
         [Timeout(250)]
         public void FromDouble_InputFromBusinessWritingsTCs_AllShouldPass()
