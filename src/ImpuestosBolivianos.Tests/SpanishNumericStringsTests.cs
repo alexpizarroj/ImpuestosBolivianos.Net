@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ImpuestosBolivianos.Tests
 {
     [TestClass]
-    public class NumericStringsTests
+    public class SpanishNumericStringsTests
     {
         private TestContext testContextInstance;
         public TestContext TestContext
@@ -22,7 +22,7 @@ namespace ImpuestosBolivianos.Tests
             "SpanishNumericStringsTCs#csv", DataAccessMethod.Sequential
         )]
         [Timeout(250)]
-        public void FromDouble_InputFromBusinessWritingsTCs_AllShouldPass()
+        public void ToCardinal_InputFromSpanishNumericStringsTCs_AllShouldPass()
         {
             var input = UInt64.Parse(TestContext.DataRow["Input"].ToString());
             var expected = TestContext.DataRow["Output"].ToString();
