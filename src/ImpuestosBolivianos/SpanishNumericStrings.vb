@@ -1,4 +1,6 @@
-﻿Public NotInheritable Class SpanishNumericStrings
+﻿Imports System.Text
+
+Public NotInheritable Class SpanishNumericStrings
     Private Sub New()
     End Sub
 
@@ -48,65 +50,66 @@
             value -= Convert.ToUInt64(nDecenas) * 10UL
         End If
 
-        Dim result = String.Empty
+        Dim resultBuilder As New StringBuilder
 
         If nTrillones > 0 Then
-            result &= ToCardinal(Convert.ToUInt64(nTrillones), True)
-            result &= If(nTrillones > 1, " trillones ", " trillón ")
+            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nTrillones), True))
+            resultBuilder.Append(If(nTrillones > 1, " trillones ", " trillón "))
         End If
 
         If nBillones > 0 Then
-            result &= ToCardinal(Convert.ToUInt64(nBillones), True)
-            result &= If(nBillones > 1, " billones ", " billón ")
+            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nBillones), True))
+            resultBuilder.Append(If(nBillones > 1, " billones ", " billón "))
         End If
 
         If nMillones > 0 Then
-            result &= ToCardinal(Convert.ToUInt64(nMillones), True)
-            result &= If(nMillones > 1, " millones ", " millón ")
+            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nMillones), True))
+            resultBuilder.Append(If(nMillones > 1, " millones ", " millón "))
         End If
 
         If nMiles > 0 Then
             If nMiles >= 2 Then
-                result &= ToCardinal(Convert.ToUInt64(nMiles), True) & " mil "
+                resultBuilder.Append(ToCardinal(Convert.ToUInt64(nMiles), True) & " mil ")
             Else
-                result &= "mil "
+                resultBuilder.Append("mil ")
             End If
         End If
 
         If nCentenas > 0 Then
             If nCentenas = 1 And nDecenas = 0 And value = 0 Then
-                result &= "cien"
+                resultBuilder.Append("cien")
             Else
-                result &= HundredsString(nCentenas) & " "
+                resultBuilder.Append(HundredsString(nCentenas))
+                resultBuilder.Append(" ")
             End If
         End If
 
         If nDecenas > 0 Then
-            result &= TensString(nDecenas)
+            resultBuilder.Append(TensString(nDecenas))
             If nDecenas >= 3 And value > 0 Then
-                result &= " y "
+                resultBuilder.Append(" y ")
             End If
         End If
 
         ' Default case: 1 <= value <= 20
         If value > 0 Then
             If nDecenas = 2 And value = 1 And apocopate Then
-                result &= "ún"
+                resultBuilder.Append("ún")
             ElseIf nDecenas = 2 And value = 2 Then
-                result &= "dós"
+                resultBuilder.Append("dós")
             ElseIf nDecenas = 2 And value = 3 Then
-                result &= "trés"
+                resultBuilder.Append("trés")
             ElseIf nDecenas = 2 And value = 6 Then
-                result &= "séis"
+                resultBuilder.Append("séis")
             Else
-                result &= UnitsPlusString(Convert.ToInt32(value))
+                resultBuilder.Append(UnitsPlusString(Convert.ToInt32(value)))
             End If
 
             If value = 1 And Not apocopate Then
-                result &= "o"
+                resultBuilder.Append("o")
             End If
         End If
 
-        Return result.Trim()
+        Return resultBuilder.ToString().Trim()
     End Function
 End Class
