@@ -14,7 +14,7 @@ TestId,Input,Output
 13,13,trece
 14,14,catorce
 15,15,quince
-16,16,dieciseis
+16,16,dieciséis
 17,17,diecisiete
 18,18,dieciocho
 19,19,diecinueve
@@ -78,7 +78,7 @@ TestId,Input,Output
 77,1001000,un millón mil
 78,1001150,un millón mil ciento cincuenta
 79,1132000,un millón ciento treinta y dos mil
-80,2346022,dos millones trescientos cuarenta y seis mil ventidos
+80,2346022,dos millones trescientos cuarenta y seis mil veintidós
 81,3000003,tres millones tres
 82,10000000,diez millones
 83,100000000,cien millones
@@ -98,7 +98,7 @@ TestId,Input,Output
 97,1001001001001000000,un trillón mil un billones mil un millones
 98,9223372036854780000,nueve trillones doscientos veintitrés mil trescientos setenta y dos billones treinta y seis mil ochocientos cincuenta y cuatro millones setecientos ochenta mil
 99,10000000000000000000,diez trillones
-100,18446744073709551615,dieciocho trillones cuatrocientos cuarenta y seis mil setecientos cuarenta y cuatro billones setenta y tres mil setecientos nuevo millones quinientos cincuenta y un mil seiscientos quince
+100,18446744073709551615,dieciocho trillones cuatrocientos cuarenta y seis mil setecientos cuarenta y cuatro billones setenta y tres mil setecientos nueve millones quinientos cincuenta y un mil seiscientos quince
 101,0,cero
 102,1987532100876,un billón novecientos ochenta y siete mil quinientos treinta y dos millones cien mil ochocientos setenta y seis
 103,4300000785000540,cuatro mil trescientos billones setecientos ochenta y cinco millones quinientos cuarenta

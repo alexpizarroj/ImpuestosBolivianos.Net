@@ -25,9 +25,9 @@ namespace ImpuestosBolivianos.Tests
         public void FromDouble_InputFromBusinessWritingsTCs_AllShouldPass()
         {
             var input = UInt64.Parse(TestContext.DataRow["Input"].ToString());
-            var expected = TestContext.DataRow["Output"].ToString().ToLower();
+            var expected = TestContext.DataRow["Output"].ToString();
 
-            var actual = SpanishNumericStrings.FromDouble(input).ToLower();
+            var actual = SpanishNumericStrings.ToCardinal(input);
 
             Assert.AreEqual(expected, actual);
         }
