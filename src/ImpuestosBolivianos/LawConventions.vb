@@ -1,7 +1,7 @@
 ﻿Imports System.Globalization
 
 Public Class LawConventions
-    Class ControlCode
+    Friend Class ControlCode
         Public Shared Function StringifyDateTime(value As DateTime) As String
             Return value.ToString("yyyyMMdd")
         End Function
@@ -11,7 +11,7 @@ Public Class LawConventions
         End Function
     End Class
 
-    Class QrControlCode
+    Friend Class QrControlCode
         Public Shared Function StringifyDateTime(value As DateTime) As String
             Return value.ToString("dd/MM/yyyy")
         End Function
