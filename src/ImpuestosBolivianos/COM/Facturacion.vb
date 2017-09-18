@@ -21,7 +21,7 @@ Namespace COM
                 Convert.ToInt64(nroFactura),
                 nitCliente,
                 fecha,
-                Convert.ToDecimal(monto),
+                CastInvoiceAmountToDecimal(monto),
                 llave
             )
         End Function
@@ -45,19 +45,25 @@ Namespace COM
                 Convert.ToInt64(nroFactura),
                 nitCliente,
                 fecha,
-                Convert.ToDecimal(importeTotal),
+                CastInvoiceAmountToDecimal(importeTotal),
                 codigoControl,
                 nitEmisor,
-                Convert.ToDecimal(importeBaseCf),
-                Convert.ToDecimal(importeIceIehdTasas),
-                Convert.ToDecimal(importeVentasNoGravadas),
-                Convert.ToDecimal(importeNoSujetoCf),
-                Convert.ToDecimal(descuentosBonosRebajas)
+                CastInvoiceAmountToDecimal(importeBaseCf),
+                CastInvoiceAmountToDecimal(importeIceIehdTasas),
+                CastInvoiceAmountToDecimal(importeVentasNoGravadas),
+                CastInvoiceAmountToDecimal(importeNoSujetoCf),
+                CastInvoiceAmountToDecimal(descuentosBonosRebajas)
             )
         End Function
 
         Public Function StringifyInvoiceAmount(amount As Double) As String
             Return ImpuestosBolivianos.Facturacion.StringifyInvoiceAmount(Convert.ToDecimal(amount))
+        End Function
+
+        Private Function CastInvoiceAmountToDecimal(amount As Double) As Decimal
+            Dim newAmount = Convert.ToDecimal(amount)
+            newAmount = Math.Round(newAmount, 2, MidpointRounding.AwayFromZero)
+            Return newAmount
         End Function
     End Class
 End Namespace
