@@ -55,5 +55,9 @@ Namespace COM
                 Convert.ToDecimal(descuentosBonosRebajas)
             )
         End Function
+
+        Public Function StringifyInvoiceAmount(amount As Double) As String
+            Return ImpuestosBolivianos.Facturacion.StringifyInvoiceAmount(Convert.ToDecimal(amount))
+        End Function
     End Class
 End Namespace

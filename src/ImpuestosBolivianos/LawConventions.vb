@@ -1,6 +1,6 @@
 ﻿Imports System.Globalization
 
-Class LawConventions
+Public Class LawConventions
     Class ControlCode
         Public Shared Function StringifyDateTime(value As DateTime) As String
             Return value.ToString("yyyyMMdd")
@@ -24,4 +24,15 @@ Class LawConventions
         Private Shared ReadOnly Property ImpuestosNacionalesNFI As New NumberFormatInfo With
             {.NumberDecimalSeparator = ".", .NumberGroupSeparator = "", .NumberDecimalDigits = 2}
     End Class
+
+    Public Shared Function StringifyInvoiceAmount(amount As Decimal) As String
+        Dim integerPart = Convert.ToUInt64(Math.Floor(amount))
+        Dim decimals = Math.Round((amount - integerPart) * 100, MidpointRounding.AwayFromZero)
+        Dim cents = Convert.ToUInt64(decimals)
+
+        Dim result = SpanishNumericStrings.ToCardinal(integerPart, True, True).ToUpper()
+        result += $" { cents.ToString().PadLeft(2, "0"c) }/100"
+
+        Return result
+    End Function
 End Class

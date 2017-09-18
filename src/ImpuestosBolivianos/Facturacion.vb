@@ -51,4 +51,8 @@
         }
         Return New QrControlCode(invoice).ToPngByteArray()
     End Function
+
+    Public Shared Function StringifyInvoiceAmount(amount As Decimal) As String
+        Return LawConventions.StringifyInvoiceAmount(amount)
+    End Function
 End Class

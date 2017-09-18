@@ -26,7 +26,11 @@ Public NotInheritable Class SpanishNumericStrings
     ' * RAE's Spanish Cardinal Numerals Specification (seen on 9/17/2017):
     ' * http://lema.rae.es/dpd/srv/search?key=cardinales&origen=RAE&lema=cardinales
     ' *
-    Public Shared Function ToCardinal(value As UInt64, Optional apocopate As Boolean = False) As String
+    Public Shared Function ToCardinal(
+        value As UInt64,
+        Optional apocopate As Boolean = False,
+        Optional useVerboseBusinessMode As Boolean = False
+    ) As String
         If value = 0 Then Return "cero"
 
         Dim nTrillones = Convert.ToInt32(value \ 1_000_000_000_000_000_000UL)
@@ -53,23 +57,24 @@ Public NotInheritable Class SpanishNumericStrings
         Dim resultBuilder As New StringBuilder
 
         If nTrillones > 0 Then
-            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nTrillones), True))
+            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nTrillones), True, useVerboseBusinessMode))
             resultBuilder.Append(If(nTrillones > 1, " trillones ", " trillón "))
         End If
 
         If nBillones > 0 Then
-            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nBillones), True))
+            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nBillones), True, useVerboseBusinessMode))
             resultBuilder.Append(If(nBillones > 1, " billones ", " billón "))
         End If
 
         If nMillones > 0 Then
-            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nMillones), True))
+            resultBuilder.Append(ToCardinal(Convert.ToUInt64(nMillones), True, useVerboseBusinessMode))
             resultBuilder.Append(If(nMillones > 1, " millones ", " millón "))
         End If
 
         If nMiles > 0 Then
-            If nMiles >= 2 Then
-                resultBuilder.Append(ToCardinal(Convert.ToUInt64(nMiles), True) & " mil ")
+            If nMiles >= 2 Or useVerboseBusinessMode Then
+                resultBuilder.Append(ToCardinal(Convert.ToUInt64(nMiles), True, useVerboseBusinessMode))
+                resultBuilder.Append(" mil ")
             Else
                 resultBuilder.Append("mil ")
             End If
