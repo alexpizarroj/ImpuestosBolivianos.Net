@@ -14,7 +14,7 @@ Características:
 * Expone una interfaz de *Component Object Model* (COM). Esto permite, entre otras cosas, que se pueda invocar desde macros de Microsoft Word, Microsoft Excel, etc.
 * Requiere .NET Framework 3.5 o superior.
 
-La biblioteca se encuentra disponible como un [Paquete de NuGet](https://www.nuget.org/packages/ImpuestosBolivianos/).
+La biblioteca se encuentra disponible en la [sección de releases](https://github.com/alexpizarroj/ImpuestosBolivianos.Net/releases) y como [paquete NuGet](https://www.nuget.org/packages/ImpuestosBolivianos/).
 
 ## Ejemplos de uso en C#
 
