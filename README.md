@@ -42,7 +42,7 @@ ImpuestosBolivianos.Facturacion.MakeControlCode(
     "2211360015",
     new DateTime(2008, 08, 24),
     46770.0m,
-    @"SYkajn$V4mNV8n$DiGBeNqgN+6ZViD5*Keg_sjS[BDPb%PQMADpfb3VDc6(Dz\GL");
+    "SYkajn$V4mNV8n$DiGBeNqgN+6ZViD5*Keg_sjS[BDPb%PQMADpfb3VDc6(Dz\\GL");
 ```
 
 Salida del ejemplo:
