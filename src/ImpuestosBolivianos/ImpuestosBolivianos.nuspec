@@ -8,6 +8,7 @@
     <owners>Alex Erick Pizarro Jimenez</owners>
     <licenseUrl>https://github.com/alexpizarroj/ImpuestosBolivianos.Net/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/alexpizarroj/ImpuestosBolivianos.Net</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/alexpizarroj/ImpuestosBolivianos.Net/master/icons/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Pasar montos y subtotales a texto; generar códigos de control y códigos QR de una factura computarizada boliviana.</description>
     <releaseNotes>First release.</releaseNotes>
