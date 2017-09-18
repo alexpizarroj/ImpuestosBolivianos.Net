@@ -5,7 +5,7 @@
         Dim nroAutorizacion = invoice.NroAutorizacion.ToString()
         Dim nroFactura = invoice.NroFactura.ToString()
         Dim nitCliente = invoice.NitCliente
-        Dim fecha = LawConventions.ControlCode.StringifyDateTime(invoice.Fecha)
+        Dim fecha = LawConventions.ControlCode.StringifyDateTime(invoice.Fecha.Value)
         Dim importeTotal = LawConventions.ControlCode.RoundImporteTotal(invoice.ImporteTotal).ToString()
         Dim llave = invoice.LlaveDosificacion
 

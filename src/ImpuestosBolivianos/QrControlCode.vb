@@ -11,7 +11,7 @@ Public Class QrControlCode
 
         Dim nroAutorizacion = invoice.NroAutorizacion.ToString()
         Dim nroFactura = invoice.NroFactura.ToString()
-        Dim fecha = LawConventions.QrControlCode.StringifyDateTime(invoice.Fecha)
+        Dim fecha = LawConventions.QrControlCode.StringifyDateTime(invoice.Fecha.Value)
         Dim codigoControl = invoice.CodigoControl
         Dim nitEmisor = invoice.NitEmisor
         Dim nitCliente = invoice.NitCliente
