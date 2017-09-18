@@ -86,7 +86,7 @@ ImpuestosBolivianos.Facturacion.RenderPngQrCode(
     0.00m,
     0.00m,
     0.00m,
-    0.00m)
+    0.00m);
 ```
 
 Salida del ejemplo:
