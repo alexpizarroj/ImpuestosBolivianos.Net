@@ -7,15 +7,14 @@ Biblioteca .NET para:
 * Calcular Códigos de Control de Facturas.
 * Calcular Códigos QR de Facturas.
 
-Expone también una interfaz de COM (*Component Object Model*). Esto permite, entre otras cosas, que se pueda invocar desde macros de Microsoft Word, Microsoft Excel, etc.
+Características:
+* Cumple con la [Descripción de los Números Cardinales de la Real Academia Española.](docs/CriteriosNrosCardinales2005.pdf)
+* Cumple con la [Resolución Normativa "RND10-0021-16: Sistema de Facturación Virtual".](docs/RND10-0021-16.pdf)
+* Cumple con la [Especificación Técnica del Código de Control Versión 7.](docs/CodigoControlV2007.pdf)
+* Requiere .NET Framework 3.5 o superior.
+* Expone una interfaz de *Component Object Model* (COM). Esto permite, entre otras cosas, que se pueda invocar desde macros de Microsoft Word, Microsoft Excel, etc.
 
-Cumple con:
-* La [Descripción de los Números Cardinales de la Real Academia Española](docs/CriteriosNrosCardinales2005.pdf).
-* La [Resolución Normativa "RND10-0021-16: SISTEMA DE FACTURACIÓN VIRTUAL"](docs/RND10-0021-16.pdf).
-* La [Especificación Técnica del Código de Control Versión 7](docs/CodigoControlV2007.pdf).
-
-Requiere:
-* .NET Framework 3.5 o superior.
+La biblioteca se encuentra disponible como un [Paquete de NuGet](https://www.nuget.org/packages/ImpuestosBolivianos/).
 
 ## Ejemplos de uso en C#
 

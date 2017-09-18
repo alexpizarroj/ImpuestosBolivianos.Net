@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ImpuestosBolivianos</id>
+    <version>1.0.0</version>
+    <title>Impuestos Bolivianos .NET</title>
+    <authors>alexpizarroj</authors>
+    <owners>Alex Erick Pizarro Jimenez</owners>
+    <licenseUrl>https://github.com/alexpizarroj/ImpuestosBolivianos.Net/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/alexpizarroj/ImpuestosBolivianos.Net</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Pasar montos y subtotales a texto; generar códigos de control y códigos QR de una factura computarizada boliviana.</description>
+    <releaseNotes>First release.</releaseNotes>
+    <copyright>Copyright (c) 2017</copyright>
+    <tags>billing facturacion facturacion-electronica bolivia qr impuestos</tags>
+  </metadata>
+</package>
