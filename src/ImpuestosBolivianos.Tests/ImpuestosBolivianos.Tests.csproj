@@ -32,9 +32,6 @@
     <None Update="Data\QrControlCode-5000TCs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\Schema.ini">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="Data\SpanishNumericStringsTCs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
