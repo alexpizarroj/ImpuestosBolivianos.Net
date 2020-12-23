@@ -20,17 +20,27 @@ jobs:
             - dotnet-packages-v1-{{ checksum "src/ImpuestosBolivianos/ImpuestosBolivianos.csproj" }}-{{ checksum "src/ImpuestosBolivianos.Tests/ImpuestosBolivianos.Tests.csproj" }}
       - run:
           name: Restore packages
-          command: cd ./src/ && dotnet restore
+          command: |
+            cd ./src/
+            dotnet restore
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "src/ImpuestosBolivianos/ImpuestosBolivianos.csproj" }}-{{ checksum "src/ImpuestosBolivianos.Tests/ImpuestosBolivianos.Tests.csproj" }}
       - run:
           name: Build
-          command: cd ./src/ && dotnet build
+          command: |
+            cd ./src/
+            dotnet build
       - run:
           name: Run tests
-          command: cd ./src/ && dotnet test
+          command: |
+            cd ./src/
+            dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\..\test-results\{assembly}-test-results.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
 
 workflows:
   test:
