@@ -1,0 +1,108 @@
+TestId,Input,Output
+1,1,uno
+2,2,dos
+3,3,tres
+4,4,cuatro
+5,5,cinco
+6,6,seis
+7,7,siete
+8,8,ocho
+9,9,nueve
+10,10,diez
+11,11,once
+12,12,doce
+13,13,trece
+14,14,catorce
+15,15,quince
+16,16,dieciséis
+17,17,diecisiete
+18,18,dieciocho
+19,19,diecinueve
+20,20,veinte
+21,21,veintiuno
+22,22,veintidós
+23,23,veintitrés
+24,24,veinticuatro
+25,25,veinticinco
+26,26,veintiséis
+27,27,veintisiete
+28,28,veintiocho
+29,29,veintinueve
+30,30,treinta
+31,31,treinta y uno
+32,32,treinta y dos
+33,33,treinta y tres
+34,40,cuarenta
+35,41,cuarenta y uno
+36,42,cuarenta y dos
+37,50,cincuenta
+38,60,sesenta
+39,70,setenta
+40,77,setenta y siete
+41,80,ochenta
+42,85,ochenta y cinco
+43,90,noventa
+44,92,noventa y dos
+45,100,cien
+46,101,ciento uno
+47,102,ciento dos
+48,110,ciento diez
+49,111,ciento once
+50,114,ciento catorce
+51,200,doscientos
+52,201,doscientos uno
+53,202,doscientos dos
+54,211,doscientos once
+55,272,doscientos setenta y dos
+56,276,doscientos setenta y seis
+57,300,trescientos
+58,368,trescientos sesenta y ocho
+59,400,cuatrocientos
+60,500,quinientos
+61,600,seiscientos
+62,700,setecientos
+63,800,ochocientos
+64,900,novecientos
+65,999,novecientos noventa y nueve
+66,1000,mil
+67,1011,mil once
+68,1111,mil ciento once
+69,1241,mil doscientos cuarenta y uno
+70,2000,dos mil
+71,5368,cinco mil trescientos sesenta y ocho
+72,10000,diez mil
+73,12917,doce mil novecientos diecisiete
+74,100000,cien mil
+75,382121,trescientos ochenta y dos mil ciento veintiuno
+76,1000000,un millón
+77,1001000,un millón mil
+78,1001150,un millón mil ciento cincuenta
+79,1132000,un millón ciento treinta y dos mil
+80,2346022,dos millones trescientos cuarenta y seis mil veintidós
+81,3000003,tres millones tres
+82,10000000,diez millones
+83,100000000,cien millones
+84,936542855,novecientos treinta y seis millones quinientos cuarenta y dos mil ochocientos cincuenta y cinco
+85,1000000000,mil millones
+86,10000000000,diez mil millones
+87,100000000000,cien mil millones
+88,1000000000000,un billón
+89,1282483000545,un billón doscientos ochenta y dos mil cuatrocientos ochenta y tres millones quinientos cuarenta y cinco
+90,10000000000000,diez billones
+91,100000000000000,cien billones
+92,1000000000000000,mil billones
+93,10000000000000000,diez mil billones
+94,100000000000000000,cien mil billones
+95,1000000000000000000,un trillón
+96,1000001000001000000,un trillón un billón un millón
+97,1001001001001000000,un trillón mil un billones mil un millones
+98,9223372036854780000,nueve trillones doscientos veintitrés mil trescientos setenta y dos billones treinta y seis mil ochocientos cincuenta y cuatro millones setecientos ochenta mil
+99,10000000000000000000,diez trillones
+100,18446744073709551615,dieciocho trillones cuatrocientos cuarenta y seis mil setecientos cuarenta y cuatro billones setenta y tres mil setecientos nueve millones quinientos cincuenta y un mil seiscientos quince
+101,0,cero
+102,1987532100876,un billón novecientos ochenta y siete mil quinientos treinta y dos millones cien mil ochocientos setenta y seis
+103,4300000785000540,cuatro mil trescientos billones setecientos ochenta y cinco millones quinientos cuarenta
+104,553221000000220999,quinientos cincuenta y tres mil doscientos veintiún billones doscientos veinte mil novecientos noventa y nueve
+105,21000,veintiún mil
+106,23000,veintitrés mil
+107,26000,veintiséis mil

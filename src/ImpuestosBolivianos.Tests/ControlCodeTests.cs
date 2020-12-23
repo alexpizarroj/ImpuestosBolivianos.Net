@@ -1,49 +1,73 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
+using TinyCsvParser;
+using TinyCsvParser.Mapping;
+using TinyCsvParser.TypeConverter;
+using Xunit;
 
 namespace ImpuestosBolivianos.Tests
 {
-    [TestClass]
-    public class ControlCodeBuilderTests
+    public class ControlCodeTests
     {
-        private TestContext testContextInstance;
-        public TestContext TestContext
+        [Theory]
+        [MemberData(nameof(GetData))]
+        public void PassesControlCodeV7TestCases(TestArgs t)
         {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
+            string actual = Facturacion.MakeControlCode(
+                t.NroAutorizacion,
+                t.NroFactura,
+                t.NitCliente,
+                t.Fecha,
+                t.ImporteTotal,
+                t.LlaveDosificacion);
+
+            Assert.Equal(t.ExpectedCodigoControl, actual);
         }
 
-        [TestMethod]
-        [DeploymentItem("Testcases\\ControlCodeV7-5000TCs.csv")]
-        [DeploymentItem("Testcases\\Schema.ini")]
-        [DataSource(
-            "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "|DataDirectory|\\Testcases\\ControlCodeV7-5000TCs.csv",
-            "ControlCodeV7-5000TCs#csv", DataAccessMethod.Sequential
-        )]
-        public void Text_InputFromControlCodeV7TCs_AllShouldPass()
+        public static IEnumerable<object[]> GetData()
         {
-            var invoice = CurrentInvoiceOnTestContext();
-            String expected = Convert.ToString(TestContext.DataRow["CodigoControl"]);
+            var csvParserOptions = new CsvParserOptions(true, ',');
+            var csvMapper = new TestArgsMapping();
+            var csvParser = new CsvParser<TestArgs>(csvParserOptions, csvMapper);
 
-            var sut = new ControlCode(invoice);
-            String actual = sut.Text;
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        private Invoice CurrentInvoiceOnTestContext()
-        {
-            return new Invoice()
+            var results = csvParser.ReadFromFile(@"Data/ControlCodeV7-5000TCs.csv", Encoding.UTF8);
+            foreach (var result in results)
             {
-                NroAutorizacion = Convert.ToInt64(TestContext.DataRow["NroAutorizacion"]),
-                NroFactura = Convert.ToInt64(TestContext.DataRow["NroFactura"]),
-                NitCliente = Convert.ToString(TestContext.DataRow["NitCliente"]),
-                Fecha = Convert.ToDateTime(TestContext.DataRow["Fecha"], CultureInfo.InvariantCulture),
-                ImporteTotal = Convert.ToDecimal(TestContext.DataRow["Monto"], CultureInfo.InvariantCulture),
-                LlaveDosificacion = Convert.ToString(TestContext.DataRow["Llave"])
-            };
+                if (!result.IsValid)
+                {
+                    throw new InvalidOperationException(result.Error.ToString());
+                }
+
+                yield return new object[] { result.Result };
+            }
+        }
+
+        public class TestArgs
+        {
+            public long NroAutorizacion { get; set; }
+            public long NroFactura { get; set; }
+            public string NitCliente { get; set; }
+            public DateTime Fecha { get; set; }
+            public decimal ImporteTotal { get; set; }
+            public string LlaveDosificacion { get; set; }
+            public string ExpectedCodigoControl { get; set; }
+        }
+
+        public class TestArgsMapping : CsvMapping<TestArgs>
+        {
+            public TestArgsMapping()
+                : base()
+            {
+                MapProperty(1, x => x.NroAutorizacion);
+                MapProperty(2, x => x.NroFactura);
+                MapProperty(3, x => x.NitCliente);
+                MapProperty(4, x => x.Fecha, new DateTimeConverter("yyyy/MM/dd", CultureInfo.InvariantCulture));
+                MapProperty(5, x => x.ImporteTotal, new DecimalConverter(CultureInfo.InvariantCulture));
+                MapProperty(6, x => x.LlaveDosificacion);
+                MapProperty(7, x => x.ExpectedCodigoControl);
+            }
         }
     }
 }

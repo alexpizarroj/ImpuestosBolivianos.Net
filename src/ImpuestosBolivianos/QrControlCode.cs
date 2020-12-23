@@ -1,4 +1,5 @@
-﻿using System.Drawing.Imaging;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using ZXing;
 using ZXing.QrCode;
@@ -16,8 +17,8 @@ namespace ImpuestosBolivianos
                 Height = 320
             };
 
-        private static BarcodeWriter QrCodeWriter { get; }
-            = new BarcodeWriter()
+        private static BarcodeWriter<Bitmap> QrCodeWriter { get; }
+            = new BarcodeWriter<Bitmap>()
             {
                 Format = BarcodeFormat.QR_CODE,
                 Options = QrCodeWriterOptions

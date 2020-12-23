@@ -1,8 +1,8 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ImpuestosBolivianos.Tests
 {
+    /*
     [TestClass]
     public class SpanishNumericStringsTests
     {
@@ -32,4 +32,5 @@ namespace ImpuestosBolivianos.Tests
             Assert.AreEqual(expected, actual);
         }
     }
+    */
 }

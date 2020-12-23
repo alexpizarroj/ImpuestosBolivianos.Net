@@ -1,9 +1,9 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
 
 namespace ImpuestosBolivianos.Tests
 {
+    /*
     [TestClass]
     public class LawConventionsTests
     {
@@ -32,4 +32,5 @@ namespace ImpuestosBolivianos.Tests
             Assert.AreEqual(expected, actual);
         }
     }
+    */
 }

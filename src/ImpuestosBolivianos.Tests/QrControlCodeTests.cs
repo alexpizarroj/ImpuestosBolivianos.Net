@@ -1,4 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Drawing;
 using System.Globalization;
@@ -9,6 +8,7 @@ using ZXing.QrCode;
 
 namespace ImpuestosBolivianos.Tests
 {
+    /*
     [TestClass]
     public class QrControlCodeTests
     {
@@ -66,4 +66,5 @@ namespace ImpuestosBolivianos.Tests
             };
         }
     }
+    */
 }
