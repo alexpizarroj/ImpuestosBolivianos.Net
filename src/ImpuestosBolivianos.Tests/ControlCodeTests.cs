@@ -12,7 +12,7 @@ namespace ImpuestosBolivianos.Tests
     public class ControlCodeTests
     {
         [Theory]
-        [MemberData(nameof(GetData))]
+        [CsvData(@"Data/ControlCodeV7-5000TCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
         public void PassesControlCodeV7TestCases(TestArgs t)
         {
             string actual = Facturacion.MakeControlCode(
@@ -24,24 +24,6 @@ namespace ImpuestosBolivianos.Tests
                 t.LlaveDosificacion);
 
             Assert.Equal(t.ExpectedCodigoControl, actual);
-        }
-
-        public static IEnumerable<object[]> GetData()
-        {
-            var csvParserOptions = new CsvParserOptions(true, ',');
-            var csvMapper = new TestArgsMapping();
-            var csvParser = new CsvParser<TestArgs>(csvParserOptions, csvMapper);
-
-            var results = csvParser.ReadFromFile(@"Data/ControlCodeV7-5000TCs.csv", Encoding.UTF8);
-            foreach (var result in results)
-            {
-                if (!result.IsValid)
-                {
-                    throw new InvalidOperationException(result.Error.ToString());
-                }
-
-                yield return new object[] { result.Result };
-            }
         }
 
         public class TestArgs
