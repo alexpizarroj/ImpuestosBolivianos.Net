@@ -1,22 +1,23 @@
 # Impuestos Bolivianos .NET
 
-## ¿Qué es esto?
+![Nuget](https://img.shields.io/nuget/v/ImpuestosBolivianos)
+![Nuget](https://img.shields.io/nuget/dt/ImpuestosBolivianos)
+[![alexpizarroj](https://circleci.com/gh/alexpizarroj/ImpuestosBolivianos.Net.svg?style=shield)](https://app.circleci.com/pipelines/github/alexpizarroj/ImpuestosBolivianos.Net)
 
 Biblioteca .NET para:
-* Pasar Montos de Factura a Cadena.
-* Calcular Códigos de Control de Facturas.
-* Calcular Códigos QR de Facturas.
+* Generar Códigos de Control de Facturas.
+* Generar Códigos QR de Facturas.
+* Pasar Montos de Factura a Texto.
 
 Características:
 * Cumple con la [Descripción de los Números Cardinales de la Real Academia Española.](docs/CriteriosNrosCardinales2005.pdf)
 * Cumple con la [Resolución Normativa "RND10-0021-16: Sistema de Facturación Virtual".](docs/RND10-0021-16.pdf)
 * Cumple con la [Especificación Técnica del Código de Control Versión 7.](docs/CodigoControlV2007.pdf)
-* Expone una interfaz de *Component Object Model* (COM). Esto permite, entre otras cosas, que se pueda invocar desde macros de Microsoft Word, Microsoft Excel, etc.
-* Requiere .NET Framework 3.5 o superior.
+* Compatible con .NET Standard 2.0.
 
 La biblioteca se encuentra disponible en la [sección de releases](https://github.com/alexpizarroj/ImpuestosBolivianos.Net/releases) y como [paquete NuGet](https://www.nuget.org/packages/ImpuestosBolivianos/).
 
-## Ejemplos de uso en C#
+## Ejemplos
 
 ### Generar Código de Control
 
@@ -28,7 +29,7 @@ ImpuestosBolivianos.Facturacion.MakeControlCode(
     nroFactura,
     nitCliente,
     fechaEmision,
-    montoTotal, 
+    montoTotal,
     llaveDosificacion);
 ```
 
