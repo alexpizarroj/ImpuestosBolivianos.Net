@@ -100,8 +100,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ImpuestosBolivianos\ImpuestosBolivianos.vbproj">
-      <Project>{b8e6a38c-656e-4f16-a100-ff70cd3f269d}</Project>
+    <ProjectReference Include="..\ImpuestosBolivianos\ImpuestosBolivianos.csproj">
+      <Project>{0ac222e7-a936-00e7-2358-350eafa8123d}</Project>
       <Name>ImpuestosBolivianos</Name>
     </ProjectReference>
   </ItemGroup>
