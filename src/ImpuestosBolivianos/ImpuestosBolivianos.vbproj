@@ -106,7 +106,6 @@
     <Compile Include="LawConventions.vb" />
     <Compile Include="Facturacion.vb" />
     <Compile Include="ControlCode.vb" />
-    <Compile Include="COM\Facturacion.vb" />
     <Compile Include="CustomAllegedRC4Cipher.vb" />
     <Compile Include="CustomBase64Encoder.vb" />
     <Compile Include="CustomVerhoeffDigitCalculator.vb" />
