@@ -25,10 +25,13 @@ namespace ImpuestosBolivianos
             { 9, 4, 5, 3, 1, 2, 6, 8, 7, 0 },
             { 4, 2, 8, 6, 5, 7, 3, 9, 0, 1 },
             { 2, 7, 9, 3, 8, 0, 6, 4, 1, 5 },
-            { 7, 0, 4, 6, 9, 1, 3, 2, 5, 8 }
+            { 7, 0, 4, 6, 9, 1, 3, 2, 5, 8 },
         };
 
-        private static readonly int[] VerhoeffInv = new int[10] { 0, 4, 3, 2, 1, 5, 6, 7, 8, 9 };
+        private static readonly int[] VerhoeffInv = new int[10]
+        {
+            0, 4, 3, 2, 1, 5, 6, 7, 8, 9,
+        };
 
         public static int Get(int value)
         {
