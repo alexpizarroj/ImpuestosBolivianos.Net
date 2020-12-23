@@ -9,7 +9,7 @@ namespace ImpuestosBolivianos.Tests
     {
         [Theory]
         [CsvData(@"Data/StringifyInvoiceAmountTCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
-        public void StringifyInvoiceAmount_InputFromStringifyInvoiceAmountTCs_AllShouldPass(TestArgs t)
+        public void PassesStringifyInvoiceAmountTestCases(TestArgs t)
         {
             var actual = LawConventions.StringifyInvoiceAmount(t.Amount);
 

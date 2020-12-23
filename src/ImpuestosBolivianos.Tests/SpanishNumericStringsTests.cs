@@ -7,7 +7,7 @@ namespace ImpuestosBolivianos.Tests
     {
         [Theory]
         [CsvData(@"Data/SpanishNumericStringsTCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
-        public void ToCardinal_InputFromSpanishNumericStringsTCs_AllShouldPass(TestArgs t)
+        public void PassesSpanishNumericStringsTestCases(TestArgs t)
         {
             var actual = SpanishNumericStrings.ToCardinal(t.InputValue);
 

@@ -10,7 +10,7 @@ namespace ImpuestosBolivianos.Tests
     {
         [Theory]
         [CsvData(@"Data/QrControlCode-5000TCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
-        public void Text_InputFromQrControlCodeTCs_AllShouldPass(TestArgs t)
+        public void PassesQrControlCodeTestCases(TestArgs t)
         {
             var invoice = new Invoice()
             {
