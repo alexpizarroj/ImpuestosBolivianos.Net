@@ -1,36 +1,35 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
+using TinyCsvParser.Mapping;
+using TinyCsvParser.TypeConverter;
+using Xunit;
 
 namespace ImpuestosBolivianos.Tests
 {
-    /*
-    [TestClass]
     public class LawConventionsTests
     {
-        private TestContext testContextInstance;
-        public TestContext TestContext
+        [Theory]
+        [CsvData(@"Data/StringifyInvoiceAmountTCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
+        public void StringifyInvoiceAmount_InputFromStringifyInvoiceAmountTCs_AllShouldPass(TestArgs t)
         {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
+            var actual = LawConventions.StringifyInvoiceAmount(t.Amount);
+
+            Assert.Equal(t.ExpectedString, actual);
         }
 
-        [TestMethod]
-        [DeploymentItem("Testcases\\StringifyInvoiceAmountTCs.csv")]
-        [DeploymentItem("Testcases\\Schema.ini")]
-        [DataSource(
-            "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "|DataDirectory|\\Testcases\\StringifyInvoiceAmountTCs.csv",
-            "StringifyInvoiceAmountTCs#csv", DataAccessMethod.Sequential
-        )]
-        public void StringifyInvoiceAmount_InputFromStringifyInvoiceAmountTCs_AllShouldPass()
+        public class TestArgs
         {
-            var amount = Convert.ToDecimal(TestContext.DataRow["Input"], CultureInfo.InvariantCulture);
-            var expected = Convert.ToString(TestContext.DataRow["Output"]);
+            public decimal Amount { get; set; }
+            public string ExpectedString { get; set; }
+        }
 
-            var actual = LawConventions.StringifyInvoiceAmount(amount);
-
-            Assert.AreEqual(expected, actual);
+        public class TestArgsMapping : CsvMapping<TestArgs>
+        {
+            public TestArgsMapping()
+                : base()
+            {
+                MapProperty(1, x => x.Amount, new DecimalConverter(CultureInfo.InvariantCulture));
+                MapProperty(2, x => x.ExpectedString);
+            }
         }
     }
-    */
 }

@@ -1,36 +1,33 @@
-﻿using System;
+﻿using TinyCsvParser.Mapping;
+using Xunit;
 
 namespace ImpuestosBolivianos.Tests
 {
-    /*
-    [TestClass]
     public class SpanishNumericStringsTests
     {
-        private TestContext testContextInstance;
-        public TestContext TestContext
+        [Theory]
+        [CsvData(@"Data/SpanishNumericStringsTCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
+        public void ToCardinal_InputFromSpanishNumericStringsTCs_AllShouldPass(TestArgs t)
         {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
+            var actual = SpanishNumericStrings.ToCardinal(t.InputValue);
+
+            Assert.Equal(t.ExpectedString, actual);
         }
 
-        [TestMethod]
-        [DeploymentItem("Testcases\\SpanishNumericStringsTCs.csv")]
-        [DeploymentItem("Testcases\\Schema.ini")]
-        [DataSource(
-            "Microsoft.VisualStudio.TestTools.DataSource.CSV",
-            "|DataDirectory|\\Testcases\\SpanishNumericStringsTCs.csv",
-            "SpanishNumericStringsTCs#csv", DataAccessMethod.Sequential
-        )]
-        [Timeout(250)]
-        public void ToCardinal_InputFromSpanishNumericStringsTCs_AllShouldPass()
+        public class TestArgs
         {
-            var input = UInt64.Parse(TestContext.DataRow["Input"].ToString());
-            var expected = TestContext.DataRow["Output"].ToString();
+            public ulong InputValue { get; set; }
+            public string ExpectedString { get; set; }
+        }
 
-            var actual = SpanishNumericStrings.ToCardinal(input);
-
-            Assert.AreEqual(expected, actual);
+        public class TestArgsMapping : CsvMapping<TestArgs>
+        {
+            public TestArgsMapping()
+                : base()
+            {
+                MapProperty(1, x => x.InputValue);
+                MapProperty(2, x => x.ExpectedString);
+            }
         }
     }
-    */
 }
