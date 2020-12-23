@@ -31,7 +31,7 @@ namespace ImpuestosBolivianos.Tests
             dynamic csvParser = Activator.CreateInstance(csvParserType, csvParserArgs);
 
             dynamic results = typeof(CsvParserExtensions)
-                .GetMethod("ReadFromFile")
+                .GetMethod("ReadFromFile", BindingFlags.Public | BindingFlags.Static)
                 .MakeGenericMethod(_entityType)
                 .Invoke(null, new object[] { csvParser, _fileName, Encoding.UTF8 });
 
