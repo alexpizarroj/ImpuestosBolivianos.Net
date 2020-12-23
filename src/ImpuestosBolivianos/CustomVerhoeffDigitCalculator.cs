@@ -1,5 +1,3 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-
 namespace ImpuestosBolivianos
 {
     internal static class CustomVerhoeffDigitCalculator
