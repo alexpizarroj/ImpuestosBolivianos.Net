@@ -1,0 +1,7 @@
+########################################################################################
+# Normalizar automáticamente finales de línea en archivos C#.
+########################################################################################
+*.cs text=auto
+*.cshtml text=auto
+*.csproj text=auto
+*.js text=auto
