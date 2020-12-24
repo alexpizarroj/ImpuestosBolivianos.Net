@@ -1,8 +1,13 @@
 # Impuestos Bolivianos .NET
 
+<div align="center">
+<img src="icons/logo.png" alt="Logo del proyecto" width="128"><br/>
+
 ![Nuget](https://img.shields.io/nuget/v/ImpuestosBolivianos)
 ![Nuget](https://img.shields.io/nuget/dt/ImpuestosBolivianos)
 [![alexpizarroj](https://circleci.com/gh/alexpizarroj/ImpuestosBolivianos.Net.svg?style=shield)](https://app.circleci.com/pipelines/github/alexpizarroj/ImpuestosBolivianos.Net)
+</div>
+
 
 Biblioteca .NET para:
 * Generar Códigos de Control de Facturas.
