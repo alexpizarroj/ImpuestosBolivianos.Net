@@ -9,6 +9,7 @@
     <Description>Impuestos Bolivianos .NET</Description>
     <Copyright>Copyright © 2020 Alex Erick Pizarro Jimenez</Copyright>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
@@ -16,6 +17,7 @@
     <NoWarn></NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
@@ -23,14 +25,22 @@
     <NoWarn></NoWarn>
     <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
+
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>ImpuestosBolivianos.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
     <PackageReference Include="ZXing.Net" Version="0.16.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>$(AssemblyName).Tests, PublicKey=002400000480000094000000060200000024000052534131000400000100010017A2AB8FBAD0514646F2A40E6DE55C0280E0BD104C2F86C6C773C4C290DE3A913AEF785A2AA500D88DB85294C669BB87D528EBBB53431F0E2EC7E9A2727480D2CFFD7186F6E3C2103BE3733CD7880BD361E05367BC2F5B6DB2B197A0B2881AC4BE6D35C2BFB2931FE28F84B47F22FE753955BB9B90F4982E6741E60F45630CAD</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 </Project>
