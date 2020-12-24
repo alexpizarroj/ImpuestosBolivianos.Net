@@ -24,30 +24,26 @@ La biblioteca se encuentra disponible en la [sección de releases](https://githu
 Uso:
 
 ```csharp
-ImpuestosBolivianos.Facturacion.MakeControlCode(
+var res = ImpuestosBolivianos.Facturacion.GenerarCodigoDeControl(
     nroAutorizacion,
     nroFactura,
     nitCliente,
     fechaEmision,
-    montoTotal,
+    importeTotal,
     llaveDosificacion);
 ```
 
-Ejemplo de uso:
+Ejemplo:
 
 ```csharp
-ImpuestosBolivianos.Facturacion.MakeControlCode(
+var res = ImpuestosBolivianos.Facturacion.GenerarCodigoDeControl(
     1004001364255L,
     227830,
     "2211360015",
     new DateTime(2008, 08, 24),
     46770.0m,
     "SYkajn$V4mNV8n$DiGBeNqgN+6ZViD5*Keg_sjS[BDPb%PQMADpfb3VDc6(Dz\\GL");
-```
 
-Salida del ejemplo:
-
-```csharp
 > "4B-A3-E1-1C-5B"
 ```
 
@@ -56,7 +52,7 @@ Salida del ejemplo:
 Uso:
 
 ```csharp
-ImpuestosBolivianos.Facturacion.RenderPngQrCode(
+var res = ImpuestosBolivianos.Facturacion.GenerarCodigoQr(
     nroAutorizacion,
     nroFactura,
     nitCliente,
@@ -71,10 +67,10 @@ ImpuestosBolivianos.Facturacion.RenderPngQrCode(
     descuentosBonosRebajas);
 ```
 
-Ejemplo de uso:
+Ejemplo:
 
 ```csharp
-ImpuestosBolivianos.Facturacion.RenderPngQrCode(
+var res = ImpuestosBolivianos.Facturacion.GenerarCodigoQr(
     471625511829685L,
     876814,
     "7904006306693",
@@ -87,28 +83,28 @@ ImpuestosBolivianos.Facturacion.RenderPngQrCode(
     0.00m,
     0.00m,
     0.00m);
-```
 
-Salida del ejemplo:
+res.Texto
+> "1665979|876814|471625511829685|19/05/2008|35958.60|35958.60|7B-F3-48-A8|7904006306693|0|0|0|0"
+
+res.BytesPng
+> (abajo: visualización de bytes de imagen)
+```
 
 ![Código QR resultante](docs/README-sample02-output.png)
 
-### Pasar Monto a Cadena
+### Pasar Monto a Texto
 
-Código:
+Uso:
 
 ```csharp
-ImpuestosBolivianos.Facturacion.StringifyInvoiceAmount(monto);
+var res = ImpuestosBolivianos.Facturacion.PasarMontoATexto(monto);
 ```
 
-Ejemplo de uso:
+Ejemplo:
 
 ```csharp
-ImpuestosBolivianos.Facturacion.StringifyInvoiceAmount(1000.5m);
-```
+var res = ImpuestosBolivianos.Facturacion.PasarMontoATexto(1000.5m);
 
-Salida del ejemplo:
-
-```csharp
 > "UN MIL 50/100"
 ```
