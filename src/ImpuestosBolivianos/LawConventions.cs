@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace ImpuestosBolivianos
 {
-    public class LawConventions
+    internal class LawConventions
     {
         internal static class ControlCode
         {

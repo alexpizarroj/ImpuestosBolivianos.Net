@@ -3,7 +3,7 @@ using System.Text;
 
 namespace ImpuestosBolivianos
 {
-    public static class SpanishNumericStrings
+    internal static class SpanishNumericStrings
     {
         private static readonly string[] UnitsPlusString = new string[]
         {

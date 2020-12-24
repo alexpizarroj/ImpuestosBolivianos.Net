@@ -2,7 +2,7 @@
 
 namespace ImpuestosBolivianos
 {
-    public struct Invoice
+    internal struct Invoice
     {
         public long NroAutorizacion;
         public long NroFactura;

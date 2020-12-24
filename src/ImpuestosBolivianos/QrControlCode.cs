@@ -7,7 +7,7 @@ using ZXing.QrCode.Internal;
 
 namespace ImpuestosBolivianos
 {
-    public class QrControlCode
+    internal class QrControlCode
     {
         private static QrCodeEncodingOptions QrCodeWriterOptions { get; }
             = new QrCodeEncodingOptions()

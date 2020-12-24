@@ -2,7 +2,7 @@ using System;
 
 namespace ImpuestosBolivianos
 {
-    public class ControlCode
+    internal class ControlCode
     {
         public ControlCode(Invoice invoice)
         {
