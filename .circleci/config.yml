@@ -21,8 +21,7 @@ jobs:
       - run:
           name: Restore packages
           command: |
-            cd ./src/
-            dotnet restore
+            dotnet restore src
       - save_cache:
           paths:
             - C:\Users\circleci\.nuget\packages
@@ -30,13 +29,15 @@ jobs:
       - run:
           name: Build
           command: |
-            cd ./src/
-            dotnet build --no-restore
+            dotnet build --no-restore src
       - run:
           name: Run tests
           command: |
-            cd ./src/
-            dotnet test --no-restore --test-adapter-path:. --logger:"junit;LogFilePath=..\..\test-results\{assembly}-test-results.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+            dotnet test \
+              --test-adapter-path:. \
+              --logger:"junit;LogFilePath=..\..\test-results\{assembly}-test-results.xml;MethodFormat=Class;FailureBodyFormat=Verbose" \
+              --no-build \
+              src
       - store_test_results:
           path: test-results
       - store_artifacts:
