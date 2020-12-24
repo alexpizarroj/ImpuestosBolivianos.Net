@@ -8,6 +8,12 @@ namespace ImpuestosBolivianos.Tests
 {
     public class ControlCodeTests
     {
+        [Fact]
+        public void Fails()
+        {
+            Assert.True(false);
+        }
+
         [Theory]
         [CsvData(@"Data/ControlCodeV7-5000TCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
         public void PassesControlCodeV7TestCases(TestArgs t)
