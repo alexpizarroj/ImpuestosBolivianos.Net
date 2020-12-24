@@ -7,14 +7,14 @@ namespace ImpuestosBolivianos
     /// </summary>
     public class CodigoQrDeFactura
     {
-        internal CodigoQrDeFactura(string texto, IEnumerable<byte> bytesPng)
+        internal CodigoQrDeFactura(string contenido, IEnumerable<byte> bytesPng)
         {
-            Texto = texto;
+            Contenido = contenido;
             BytesPng = bytesPng;
         }
 
         /// <value>El contenido del código QR.</value>
-        public string Texto { get; }
+        public string Contenido { get; }
 
         /// <value>La secuencia de bytes de una imagen PNG del código QR.</value>
         public IEnumerable<byte> BytesPng { get; }

@@ -84,7 +84,7 @@ var res = ImpuestosBolivianos.Facturacion.GenerarCodigoQr(
     0.00m,
     0.00m);
 
-res.Texto
+res.Contenido
 > "1665979|876814|471625511829685|19/05/2008|35958.60|35958.60|7B-F3-48-A8|7904006306693|0|0|0|0"
 
 res.BytesPng

@@ -35,7 +35,7 @@ namespace ImpuestosBolivianos.Tests
 
             var actual = ReadQrCodeText(res.BytesPng.ToArray());
 
-            Assert.Equal(res.Texto, actual);
+            Assert.Equal(res.Contenido, actual);
         }
 
         [Theory]
@@ -56,7 +56,7 @@ namespace ImpuestosBolivianos.Tests
                 t.ImporteNoSujetoCf,
                 t.DescuentosBonosRebajas);
 
-            Assert.Equal(t.ExpectedQrCodeContent, codigoQrDeFactura.Texto);
+            Assert.Equal(t.ExpectedQrCodeContent, codigoQrDeFactura.Contenido);
         }
 
         public class TestArgs
