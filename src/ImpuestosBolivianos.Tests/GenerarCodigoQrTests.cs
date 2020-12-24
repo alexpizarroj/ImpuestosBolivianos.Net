@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -7,6 +8,9 @@ using System.Security.Cryptography;
 using TinyCsvParser.Mapping;
 using TinyCsvParser.TypeConverter;
 using Xunit;
+using ZXing;
+using ZXing.Common;
+using ZXing.QrCode;
 
 namespace ImpuestosBolivianos.Tests
 {
@@ -20,19 +24,18 @@ namespace ImpuestosBolivianos.Tests
                 876814,
                 "7904006306693",
                 new DateTime(2008, 5, 19),
-                35958.60m,
                 "7B-F3-48-A8",
                 "1665979",
+                35958.60m,
                 35958.60m,
                 0.00m,
                 0.00m,
                 0.00m,
                 0.00m);
 
-            var actualMd5 = CalculateMd5(res.BytesPng);
+            var actual = ReadQrCodeText(res.BytesPng.ToArray());
 
-            const string expectedMd5 = "554fb8a814402e6b6b206427452cc1a4";
-            Assert.Equal(expectedMd5, actualMd5);
+            Assert.Equal(res.Texto, actual);
         }
 
         [Theory]
@@ -44,9 +47,9 @@ namespace ImpuestosBolivianos.Tests
                 t.NroFactura,
                 t.NitCliente,
                 t.Fecha,
-                t.ImporteTotal,
                 t.CodigoControl,
                 t.NitEmisor,
+                t.ImporteTotal,
                 t.ImporteBaseCf,
                 t.ImporteIceIehdTasas,
                 t.ImporteVentasNoGravadas,
@@ -94,15 +97,17 @@ namespace ImpuestosBolivianos.Tests
             }
         }
 
-        private string CalculateMd5(IEnumerable<byte> bytes)
+        private string ReadQrCodeText(byte[] imageBytes)
         {
-            using (var md5 = MD5.Create())
+            using (var mstream = new MemoryStream(imageBytes))
             {
-                using (var stream = new MemoryStream(bytes.ToArray()))
+                using (var bitmap = Image.FromStream(mstream) as Bitmap)
                 {
-                    var hashBytes = md5.ComputeHash(stream);
-                    var hash = BitConverter.ToString(hashBytes).Replace("-", "").ToLowerInvariant();
-                    return hash;
+                    var luminanceSource = new ZXing.Windows.Compatibility.BitmapLuminanceSource(bitmap);
+                    var binarizer = new HybridBinarizer(luminanceSource);
+                    var binaryBitmap = new BinaryBitmap(binarizer);
+                    var result = new QRCodeReader().decode(binaryBitmap)?.Text;
+                    return result;
                 }
             }
         }
