@@ -93,10 +93,10 @@ namespace ImpuestosBolivianos
         }
 
         /// <summary>
-        /// Pasar un monto dado a texto.
+        /// Pasar un monto de factura a texto.
         /// </summary>
         /// <param name="monto">El monto.</param>
-        /// <returns>Una cadena de texto que representa el monto pasado a texto.</returns>
+        /// <returns>Una cadena de texto que representa el monto.</returns>
         public static string PasarMontoATexto(decimal monto)
         {
             return LawConventions.StringifyInvoiceAmount(monto);
