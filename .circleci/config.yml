@@ -31,12 +31,12 @@ jobs:
           name: Build
           command: |
             cd ./src/
-            dotnet build
+            dotnet build --no-restore
       - run:
           name: Run tests
           command: |
             cd ./src/
-            dotnet test --test-adapter-path:. --logger:"junit;LogFilePath=..\..\test-results\{assembly}-test-results.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+            dotnet test --no-restore --test-adapter-path:. --logger:"junit;LogFilePath=..\..\test-results\{assembly}-test-results.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
       - store_test_results:
           path: test-results
       - store_artifacts:
