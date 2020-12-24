@@ -1,4 +1,5 @@
-﻿using TinyCsvParser.Mapping;
+﻿using ImpuestosBolivianos.Internal;
+using TinyCsvParser.Mapping;
 using Xunit;
 
 namespace ImpuestosBolivianos.Tests
@@ -7,7 +8,7 @@ namespace ImpuestosBolivianos.Tests
     {
         [Theory]
         [CsvData(@"Data/SpanishNumericStringsTCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
-        public void PassesSpanishNumericStringsTestCases(TestArgs t)
+        public void PassesTestCases(TestArgs t)
         {
             var actual = SpanishNumericStrings.ToCardinal(t.InputValue);
 

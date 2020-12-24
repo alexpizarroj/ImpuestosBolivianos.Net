@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace ImpuestosBolivianos
+namespace ImpuestosBolivianos.Internal
 {
     internal class LawConventions
     {

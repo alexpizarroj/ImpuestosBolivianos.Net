@@ -1,4 +1,4 @@
-namespace ImpuestosBolivianos
+namespace ImpuestosBolivianos.Internal
 {
     internal static class CustomVerhoeffDigitCalculator
     {

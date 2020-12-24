@@ -6,13 +6,13 @@ using Xunit;
 
 namespace ImpuestosBolivianos.Tests
 {
-    public class ControlCodeTests
+    public class GenerarCodigoDeControlTests
     {
         [Theory]
         [CsvData(@"Data/ControlCodeV7-5000TCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
-        public void PassesControlCodeV7TestCases(TestArgs t)
+        public void PassesTestCases(TestArgs t)
         {
-            string actual = Facturacion.MakeControlCode(
+            string actual = Facturacion.GenerarCodigoDeControl(
                 t.NroAutorizacion,
                 t.NroFactura,
                 t.NitCliente,

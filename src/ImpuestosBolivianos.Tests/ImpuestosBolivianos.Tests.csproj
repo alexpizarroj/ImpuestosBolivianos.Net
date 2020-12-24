@@ -41,7 +41,7 @@
     <None Update="Data\SpanishNumericStringsTCs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Data\StringifyInvoiceAmountTCs.csv">
+    <None Update="Data\PasarMontoATextoTCs.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

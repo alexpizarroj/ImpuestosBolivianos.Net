@@ -1,28 +1,26 @@
-using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using ZXing;
 using ZXing.QrCode;
 using ZXing.QrCode.Internal;
+using ZXing.Windows.Compatibility;
 
-namespace ImpuestosBolivianos
+namespace ImpuestosBolivianos.Internal
 {
     internal class QrControlCode
     {
-        private static QrCodeEncodingOptions QrCodeWriterOptions { get; }
-            = new QrCodeEncodingOptions()
-            {
-                ErrorCorrection = ErrorCorrectionLevel.M,
-                Width = 320,
-                Height = 320
-            };
+        private static QrCodeEncodingOptions QrCodeWriterOptions { get; }= new QrCodeEncodingOptions()
+        {
+            ErrorCorrection = ErrorCorrectionLevel.M,
+            Width = 320,
+            Height = 320
+        };
 
-        private static BarcodeWriter<Bitmap> QrCodeWriter { get; }
-            = new BarcodeWriter<Bitmap>()
-            {
-                Format = BarcodeFormat.QR_CODE,
-                Options = QrCodeWriterOptions
-            };
+        private static BarcodeWriter QrCodeWriter { get; } = new BarcodeWriter()
+        {
+            Format = BarcodeFormat.QR_CODE,
+            Options = QrCodeWriterOptions
+        };
 
         public QrControlCode(Invoice invoice)
         {

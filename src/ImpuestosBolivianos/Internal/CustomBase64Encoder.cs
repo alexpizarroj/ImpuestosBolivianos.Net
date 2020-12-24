@@ -1,6 +1,6 @@
 using System;
 
-namespace ImpuestosBolivianos
+namespace ImpuestosBolivianos.Internal
 {
     internal static class CustomBase64Encoder
     {

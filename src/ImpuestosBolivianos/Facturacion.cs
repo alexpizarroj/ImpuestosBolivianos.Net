@@ -1,15 +1,16 @@
 ﻿using System;
+using ImpuestosBolivianos.Internal;
 
 namespace ImpuestosBolivianos
 {
     public static class Facturacion
     {
-        public static string MakeControlCode(
+        public static string GenerarCodigoDeControl(
             long nroAutorizacion,
             long nroFactura,
             string nitCliente,
             DateTime fecha,
-            decimal monto,
+            decimal importeTotal,
             string llave)
         {
             var invoice = new Invoice()
@@ -18,13 +19,16 @@ namespace ImpuestosBolivianos
                 NroFactura = nroFactura,
                 NitCliente = nitCliente,
                 Fecha = fecha,
-                ImporteTotal = monto,
+                ImporteTotal = importeTotal,
                 LlaveDosificacion = llave
             };
-            return new ControlCode(invoice).Text;
+
+            var res = new ControlCode(invoice);
+
+            return res.Text;
         }
 
-        public static byte[] RenderPngQrCode(
+        public static CodigoQrDeFactura GenerarCodigoQr(
             long nroAutorizacion,
             long nroFactura,
             string nitCliente,
@@ -53,12 +57,15 @@ namespace ImpuestosBolivianos
                 ImporteNoSujetoCf = importeNoSujetoCf,
                 DescuentosBonosRebajas = descuentosBonosRebajas
             };
-            return new QrControlCode(invoice).ToPngByteArray();
+
+            var res = new QrControlCode(invoice);
+
+            return new CodigoQrDeFactura(res.Text, res.ToPngByteArray());
         }
 
-        public static string StringifyInvoiceAmount(decimal amount)
+        public static string PasarMontoATexto(decimal monto)
         {
-            return LawConventions.StringifyInvoiceAmount(amount);
+            return LawConventions.StringifyInvoiceAmount(monto);
         }
     }
 }

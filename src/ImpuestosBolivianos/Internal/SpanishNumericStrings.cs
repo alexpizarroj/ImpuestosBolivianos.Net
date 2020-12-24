@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace ImpuestosBolivianos
+namespace ImpuestosBolivianos.Internal
 {
     internal static class SpanishNumericStrings
     {

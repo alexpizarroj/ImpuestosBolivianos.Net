@@ -5,13 +5,13 @@ using Xunit;
 
 namespace ImpuestosBolivianos.Tests
 {
-    public class LawConventionsTests
+    public class PasarMontoATextoTests
     {
         [Theory]
-        [CsvData(@"Data/StringifyInvoiceAmountTCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
-        public void PassesStringifyInvoiceAmountTestCases(TestArgs t)
+        [CsvData(@"Data/PasarMontoATextoTCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
+        public void PassesTestCases(TestArgs t)
         {
-            var actual = LawConventions.StringifyInvoiceAmount(t.Amount);
+            var actual = Facturacion.PasarMontoATexto(t.Amount);
 
             Assert.Equal(t.ExpectedString, actual);
         }

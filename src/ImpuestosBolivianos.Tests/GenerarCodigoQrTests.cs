@@ -6,31 +6,27 @@ using Xunit;
 
 namespace ImpuestosBolivianos.Tests
 {
-    public class QrControlCodeTests
+    public class GenerarCodigoQrTests
     {
         [Theory]
         [CsvData(@"Data/QrControlCode-5000TCs.csv", typeof(TestArgs), typeof(TestArgsMapping))]
-        public void PassesQrControlCodeTestCases(TestArgs t)
+        public void PassesTestCases(TestArgs t)
         {
-            var invoice = new Invoice()
-            {
-                NitEmisor = t.NitEmisor,
-                NroAutorizacion = t.NroAutorizacion,
-                NroFactura = t.NroFactura,
-                NitCliente = t.NitCliente,
-                CodigoControl = t.CodigoControl,
-                Fecha = t.Fecha,
-                ImporteTotal = t.ImporteTotal,
-                ImporteBaseCf = t.ImporteBaseCf,
-                ImporteIceIehdTasas = t.ImporteIceIehdTasas,
-                ImporteVentasNoGravadas = t.ImporteVentasNoGravadas,
-                ImporteNoSujetoCf = t.ImporteNoSujetoCf,
-                DescuentosBonosRebajas = t.DescuentosBonosRebajas,
-            };
+            var codigoQrDeFactura = Facturacion.GenerarCodigoQr(
+                t.NroAutorizacion,
+                t.NroFactura,
+                t.NitCliente,
+                t.Fecha,
+                t.ImporteTotal,
+                t.CodigoControl,
+                t.NitEmisor,
+                t.ImporteBaseCf,
+                t.ImporteIceIehdTasas,
+                t.ImporteVentasNoGravadas,
+                t.ImporteNoSujetoCf,
+                t.DescuentosBonosRebajas);
 
-            string actual = new QrControlCode(invoice).Text;
-
-            Assert.Equal(t.ExpectedQrCodeContent, actual);
+            Assert.Equal(t.ExpectedQrCodeContent, codigoQrDeFactura.Texto);
         }
 
         public class TestArgs
