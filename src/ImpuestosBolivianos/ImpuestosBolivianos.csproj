@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <OutputType>Library</OutputType>
     <LangVersion>latest</LangVersion>
-    <Version>2.0.0</Version>
+    <Version>2.0.1</Version>
     <AssemblyTitle>ImpuestosBolivianos</AssemblyTitle>
     <Product>Impuestos Bolivianos .NET</Product>
     <PackageId>ImpuestosBolivianos</PackageId>
@@ -15,7 +15,7 @@
     <PackageIconUrl>https://raw.githubusercontent.com/alexpizarroj/ImpuestosBolivianos.Net/master/src/ImpuestosBolivianos/icon.png</PackageIconUrl>
     <Description>Pasar montos y subtotales a texto; generar códigos de control y códigos QR de una factura computarizada boliviana.</Description>
     <Copyright>Copyright © 2020 Alex Erick Pizarro Jimenez</Copyright>
-    <PackageTags>bolivia;billing;facturacion;taxes;impuestos;codigo de control;control code;qr code;codigo qr</PackageTags>
+    <PackageTags>bolivia;billing;facturacion;taxes;impuestos;codigo;control;code;qr</PackageTags>
     <PackageReleaseNotes>- Adicionada compatibilidad con .NET Standard 2.0.
 - API normalizada al español y ligeramente modificada para retornar información estructurada del código QR.
 - Removido soporte COM.</PackageReleaseNotes>
