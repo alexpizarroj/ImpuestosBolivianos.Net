@@ -1,7 +1,7 @@
 # Impuestos Bolivianos .NET
 
 <div align="center">
-<img src="icons/logo.png" alt="Logo del proyecto" width="128"><br/>
+<img src="src/ImpuestosBolivianos/icon.png" alt="Ícono del proyecto" width="128"><br/>
 
 [![Nuget](https://img.shields.io/nuget/v/ImpuestosBolivianos)](https://www.nuget.org/packages/ImpuestosBolivianos/)
 [![Nuget](https://img.shields.io/nuget/dt/ImpuestosBolivianos)](https://www.nuget.org/packages/ImpuestosBolivianos/)
