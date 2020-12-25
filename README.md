@@ -20,7 +20,7 @@ Características:
 * Cumple con la [Especificación Técnica del Código de Control Versión 7.](docs/CodigoControlV2007.pdf)
 * Compatible con .NET Standard 2.0.
 
-La biblioteca se encuentra disponible en la [sección de releases](https://github.com/alexpizarroj/ImpuestosBolivianos.Net/releases) y como [paquete NuGet](https://www.nuget.org/packages/ImpuestosBolivianos/).
+La biblioteca se encuentra disponible como [paquete NuGet](https://www.nuget.org/packages/ImpuestosBolivianos/).
 
 ## Ejemplos
 
